@@ -1,0 +1,368 @@
+<!doctype html>
+<html dir="rtl" lang="ar-SA">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.3.0 -->
+<title>تنصيب البرامج اللازمة | لنتعلم برمجة الأنظمة المدمجة</title>
+<meta property="og:title" content="تنصيب البرامج اللازمة" />
+<meta name="author" content="خالد الغامدي" />
+<meta property="og:locale" content="ar_SA" />
+<meta name="description" content="تختلف برمجة الأنظمة المدمجة عن أنواع البرمجة الأخرى المختلفة مثل برمجة مواقع الإنترنت والبرامج المكتبية وبرامج الجوالات حيث أنها ترتبط إرتباط مباشر بالهاردوير الذي سيعمل عليها هذا البرنامج ولذا وجب على المبرمج أن يكون على معرفة تامة بكيفية عمل والتعامل مع هذا الهاردوير بالإضافة الى أي قطعة هاردوير أخرى قد يتعامل معها هذا البرنامج. وبذلك فإنه يستحيل العمل عليها دون الرجوع الى المستندات المتعلقة بها والموفرة من الشركة المصنعة وبخاصة الـ datasheet والتي سنناقشها بتفصيل أكبر في مقالة مقبلة بإذن الله." />
+<meta property="og:description" content="تختلف برمجة الأنظمة المدمجة عن أنواع البرمجة الأخرى المختلفة مثل برمجة مواقع الإنترنت والبرامج المكتبية وبرامج الجوالات حيث أنها ترتبط إرتباط مباشر بالهاردوير الذي سيعمل عليها هذا البرنامج ولذا وجب على المبرمج أن يكون على معرفة تامة بكيفية عمل والتعامل مع هذا الهاردوير بالإضافة الى أي قطعة هاردوير أخرى قد يتعامل معها هذا البرنامج. وبذلك فإنه يستحيل العمل عليها دون الرجوع الى المستندات المتعلقة بها والموفرة من الشركة المصنعة وبخاصة الـ datasheet والتي سنناقشها بتفصيل أكبر في مقالة مقبلة بإذن الله." />
+<link rel="canonical" href="http://localhost:4000/2017/10/02/installing-keil-uvision.html" />
+<meta property="og:url" content="http://localhost:4000/2017/10/02/installing-keil-uvision.html" />
+<meta property="og:site_name" content="لنتعلم برمجة الأنظمة المدمجة" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-10-02T00:00:00+03:00" />
+<script type="application/ld+json">
+{"name":null,"description":"تختلف برمجة الأنظمة المدمجة عن أنواع البرمجة الأخرى المختلفة مثل برمجة مواقع الإنترنت والبرامج المكتبية وبرامج الجوالات حيث أنها ترتبط إرتباط مباشر بالهاردوير الذي سيعمل عليها هذا البرنامج ولذا وجب على المبرمج أن يكون على معرفة تامة بكيفية عمل والتعامل مع هذا الهاردوير بالإضافة الى أي قطعة هاردوير أخرى قد يتعامل معها هذا البرنامج. وبذلك فإنه يستحيل العمل عليها دون الرجوع الى المستندات المتعلقة بها والموفرة من الشركة المصنعة وبخاصة الـ datasheet والتي سنناقشها بتفصيل أكبر في مقالة مقبلة بإذن الله.","author":{"@type":"Person","name":"خالد الغامدي"},"@type":"BlogPosting","url":"http://localhost:4000/2017/10/02/installing-keil-uvision.html","publisher":null,"image":null,"headline":"تنصيب البرامج اللازمة","dateModified":"2017-10-02T00:00:00+03:00","datePublished":"2017-10-02T00:00:00+03:00","sameAs":null,"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/10/02/installing-keil-uvision.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script type="text/javascript" src="/assets/js/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="/assets/js/main.js"></script>
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>لنتعلم برمجة الأنظمة المدمجة</h1>
+		<h3 text-align="left">Embedded Systems Programming Bootcamp</h3>
+        <p>كورس تعليمي يهدف الى اكسابك المعرفة اللازمة والمهارات التقنية المتعلقة ببرمجة وتطوير الأنظمة المدمجة وفهم خصائصها ومكوناتها</p>
+        <p class="view">
+            <a href="/">الصفحة الرئيسية</a><br>
+            <!--<a href="/#contents">الدروس</a><br>-->
+            <a href="/lessons.html">قائمة الدروس</a><br>
+            <a href="/feed.xml" title="Subscribe to our RSS feed">خدمة RSS</a>
+        </p>
+        <!--/assets/images/sidebar/rss.svg-->
+          <!--<aside>-->
+    <h3>للتواصل</h3>
+    <ul class="social">
+    <li><a href="https://github.com/alhabish/embedded-course" title="Github" class="github">Github</a></li>
+    <li><a href="mailto:alhabish@gmail.com" title="Email" class="mail">Email</a></li>
+    <li><a href="https://www.linkedin.com/in/khalidalghamidi" title="Linked in" class="linked">LinkedIn</a></li>
+    <li><a href="http://www.twitter.com/alhabish" title="Twitter" class="twitter">Twitter</a></li>
+    </ul>
+    <!--</aside>-->
+          
+<!--        
+        
+
+        
+
+        
+-->
+      </header>
+      <section>
+
+      <h1>2. تنصيب البرامج اللازمة</h1>
+<p class="meta">2017-10-02</p>
+
+
+<!-- from https://github.com/cstack/db_tutorial -->
+
+
+      
+      
+
+    <hr>
+      
+          <a class="prev" href="/2017/10/05/your-first-project.html">3. كتابة أول مشروع في Keil uVision</a> <br>
+      
+      
+          <a class="next" href="/2017/09/27/introduction.html">1. مقدمة في الأنظمة المدمجة</a> <br>
+      
+    <br>
+    <hr>
+
+    <p><p>تختلف برمجة الأنظمة المدمجة عن أنواع البرمجة الأخرى المختلفة مثل برمجة مواقع الإنترنت والبرامج المكتبية وبرامج الجوالات حيث أنها ترتبط إرتباط مباشر بالهاردوير الذي سيعمل عليها هذا البرنامج ولذا وجب على المبرمج أن يكون على معرفة تامة بكيفية عمل والتعامل مع هذا الهاردوير بالإضافة الى أي قطعة هاردوير أخرى قد يتعامل معها هذا البرنامج. وبذلك فإنه يستحيل العمل عليها دون الرجوع الى المستندات المتعلقة بها والموفرة من الشركة المصنعة وبخاصة الـ datasheet والتي سنناقشها بتفصيل أكبر في مقالة مقبلة بإذن الله.</p>
+
+<p>وعند العمل على هذه البرمجيات وتطويرها فإن ذلك يكون على جهاز مكتبي أو لابتوب مبني على هيكلة x64 Instruction Set Architecture (ISA) على سبيل المثال ولكنه ينفذ executed ويصحح debugged على هيكلة مختلفة ARM Cortex M مثلا، وهذا ما يسمى بالـ cross compiling. ولغة البرمجة المستخدمة لبرمجة الأنظمة المدمجة في العادة  هي C والى حد ما Assembly و ++C.  وأهم أسباب ذلك يعود لسرعتها في التنفيذ وتوفر الأدوات البرمجية toolchains لها.</p>
+
+<h3><a href=""></a>البرامج التي سنقوم بتحميلها</h3>
+<ul>
+  <li><strong>Keil uVision IDE</strong> بيئة التطوير التي سنستخدمها بإذن الله في برمجة المتحكم</li>
+  <li><strong>Stellaris ICDI Drivers</strong> برنامج تشغيل driver يمكّن أجهزتنا المكتبية من التخاطب مع المتحكم</li>
+</ul>
+
+<h3><a href=""></a>Keil uVision IDE</h3>
+<p>يوجد لدينا عدة بيئات تطوير Integrated Development Environment (IDE) يمكن الأختيار فيما بينها لبرمجة الـ TI TM4C123GXL LaunchPad. هذه البرامج توفر لنا إمكانية إدارة وتعديل الكود البرمجي، اكتشاف الأخطاء debugging، تحويله الى برنامج compile ليتمكن المتحكم من تشغيله، كتابة البرنامج على البورد flash، ومحاكاة طريقة عمل البرنامج على البورد simulation.</p>
+
+<p>سنقوم بتحميل النسخة المجانية من Keil uVision وهي نسخة للمشاريح الصغيرة المحدودة والتي لا يتعدى حجم الكود فيها 32 kbyte. نقوم بذلك بالذهاب أولاً الى الرابط التالي وتعبئة النموذج:
+<a href="https://www.keil.com/demo/eval/arm.htm">https://www.keil.com/demo/eval/arm.htm</a></p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/keil_registration_form.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/keil_registration_form.png');" />
+    </td>
+</tr>
+</table>
+
+<p>بعد تعبئة النموذج والضغط على Next سيتم توجيهك الى صفحة التحميل.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/mdk_arm_download.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/mdk_arm_download.png');" />
+    </td>
+</tr>
+</table>
+
+<p>قم بالضغط على الرابط MDK524A.EXE لتحميل البرنامج.</p>
+
+<p>عند إكتمال تحميل البرنامج، قم بالنقر مرتان على الملف mdk524a.exe لتشغيله وإبتداء عملية التنصيب وإستمر في الخطوات المعتادة.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/uvision_splash_screen.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/uvision_splash_screen.png');" />
+    </td>
+</tr>
+</table>
+
+<p>عند الإنتهاء وفتح البرنامج لأول مرة سترى نافذة الـ Pack Installer لتحميل الملفات المتعلقة بالبورد Device Family Pack.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/pack_installer.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/pack_installer.png');" />
+    </td>
+</tr>
+</table>
+
+<p>وفي حالة إنك لم تراها فبإمكانك فتحها عن طريق الضغط على الزر التالي:</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/pack_installer_button.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/pack_installer_button.png');" />
+    </td>
+</tr>
+</table>
+
+<p>في نفس النافذه وفي تبويب Devices على اليسار، إختر Texas Instruments ثم Tiva C Series ثم TM4C123x Series</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/pi_tivac_tm4c123x.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/pi_tivac_tm4c123x.png');" />
+    </td>
+</tr>
+</table>
+
+<p>في تبويب الـ Packs على اليمين، إضغط على الزر بجانب Keil::TM4C_DFP وبجانب ARM::CMSIS</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/pi_packs.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/pi_packs.png');" />
+    </td>
+</tr>
+</table>
+
+<p>سيبدأ الـ Pack Installer في تحميل الملفات المطلوبة</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/pi_packs_output.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/pi_packs_output.png');" />
+    </td>
+</tr>
+</table>
+
+<p>تأكد من أنه تم تحميل جميع الملفات بشكل كامل قبل إغلاق uVision.</p>
+
+<h3><a href=""></a>Stellaris ICDI Drivers</h3>
+<p>سنقوم الآن بتحميل برنامج التشغيل driver والذي يمكننا من التخاطب مع المتحكم، وذلك عبر الرابط التالي:</p>
+
+<p><a href="http://www.ti.com/tool/stellaris_icdi_drivers">http://www.ti.com/tool/stellaris_icdi_drivers</a></p>
+
+<p>يمكننا تحميل برنامج التشغيل عن طريق الضغط على الزر التالي والموجود في أعلى الصفحة:</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/icdi_driver_download.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/icdi_driver_download.png');" />
+    </td>
+</tr>
+</table>
+
+<p>قم بفك ضغط الملف spmc016a.zip بعد إكتمال تحميله لتحصل على المجلد stellaris_icdi_drivers.</p>
+
+<p>وفي أسفل الصفحة السابقة، يمكن تحميل ملف pdf يحتوي على خطوات التحميل والتنصيب.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/icdi_driver_guide.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/icdi_driver_guide.png');" />
+    </td>
+</tr>
+</table>
+
+<p>فيما يلي ساذكر بإذن الله خطوات التنصيب بإختصار، ولمزيد من التفصيل يمكن الرجوع الى مستند الـ pdf الذي تم تحميله سابقاً spmu287c.pdf.</p>
+
+<p>أولاً، لتهيئة البورد بشكل صحيح، قم بتوصيل كيبل الـ usb في المنفذ المحدد في الصورة التالية. أيضاً، قم بتحريك زر الـ Power mode الى اليمين ليصبح على وضعية الـ Debug.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/tivac_setup.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/tivac_setup.png');" />
+    </td>
+</tr>
+</table>
+
+<p>بعد قيامك بتوصيل الطرف الآخر لكيبل الـ usb بجهاز الحاسب، قم بفتح نافذة <strong>إدارة الأجهزة</strong> Device Manager في وندوز. وفي قسم الـ <strong>أجهزة أخرى</strong> Other Devices سترى ما يلي:</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/other_devices.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/other_devices.png');" />
+    </td>
+</tr>
+</table>
+
+<p>أضغط عليها باليمين وأختر <strong>تحديث برنامج التشغيل…</strong> Update Driver Software</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/other_devices_update.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/other_devices_update.png');" />
+    </td>
+</tr>
+</table>
+
+<p>وفي النافذة الجديدة إختر <strong>إستعراض الكمبيوتر بحثاً عن برنامج التشغيل</strong>  Browse my computer for driver software.</p>
+
+<p>في النافذة التالية ابحث عن مجلد stellaris_icdi_drivers الذي قمنا بفك ضغطه في خطوة سابقة.</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/browse_for_driver.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/browse_for_driver.png');" />
+    </td>
+</tr>
+</table>
+
+<p>قم بالضغط على زر <strong>التالي</strong>  Next ليبدأ ويندوز بتثبيت برنامج التشغل.</p>
+
+<p>إستمر في خطوات التنصيب الى أن ترى نافذة تخبرك بأن عملية التنصيب تمت بنجاح.</p>
+
+<p>قم بتحديث برامج تشغيل جميع الأجهزة تحت تصنيف <strong>أجهزة أخرى</strong>  Other devices بنفس الطريقة السابقة الى أن لا يتبقى منها شيئ.</p>
+
+<p>عند الإنتهاء من تنصيب جميع برامج التشغيل بنجاح سترى التالي في نافذة <strong>إدارة الأجهزة</strong> Device Manager:</p>
+
+<table style="border: 1px solid #CACFD2">
+
+
+<tr>
+    <td style="text-align:center; align:center">
+        <img src="http://localhost:4000/assets/files/article_02/successful_driver_setup.png" alt="" style="cursor: pointer;" onclick="openInNewTab('http://localhost:4000/assets/files/article_02/successful_driver_setup.png');" />
+    </td>
+</tr>
+</table>
+
+<p>وبذلك أنتهينا من تحميل وتنصيب البرامج اللازمة لبرمجة المتحكمات والأنظمة المدمجة. وسنقوم في المقالة القادمة بإذن الله بتشغيل برنامج uVision وتشغيل كود عشوائي على البورد لنتأكد من أن الخطوات السابقة تمت بشكل صحيح وأن عملية تنصيب البرامج تمت بنجاح.</p>
+
+</p>
+
+    <blockquote class="post_ending_note">
+        <p><strong>ملاحظة</strong>: هذه المقالة تحت التحديث المستمر،، وملاحظاتكم وإقتراحاتكم ستساعد بإذن الله في إخراجها بالصورة التي كتبت من أجلها وهي تمهيد الطريق أمامكم لتعلم برمجة الأنظمة المدمجة </p>
+    </blockquote>
+
+    <hr>
+      
+          <a class="prev" href="/2017/10/05/your-first-project.html">3. كتابة أول مشروع في Keil uVision</a> <br>
+      
+      
+          <a class="next" href="/2017/09/27/introduction.html">1. مقدمة في الأنظمة المدمجة</a> <br>
+      
+    <br>
+    <hr>
+
+<br>
+
+
+
+
+<div id="disqus_thread"></div>
+<script>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = "http://localhost:4000/2017/10/02/installing-keil-uvision.html";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "/2017/10/02/installing-keil-uvision"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://embedded-course.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+
+
+      </section>
+<!--      
+      <footer>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+-->
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+    <!--<script type="text/javascript" src="/assets/js/staticman.js"></script>-->
+
+  
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106571814-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+  
+  </body>
+</html>

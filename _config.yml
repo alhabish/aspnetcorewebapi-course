@@ -1,0 +1,37 @@
+theme: jekyll-theme-minimal
+encoding: UTF-8
+title: لنتعلم برمجة الأنظمة المدمجة
+email: alhabish@gmail.com
+#repository: "kalhabish/kalhabish.github.io"
+repository: "alhabish/embedded-course"
+author: خالد الغامدي
+lang: ar-SA
+locale: ar-SA
+dir: rtl
+description: "كورس تعليمي يهدف الى اكسابك المعرفة اللازمة والمهارات التقنية المتعلقة ببرمجة وتطوير الأنظمة المدمجة وفهم خصائصها ومكوناتها"
+
+# User/Organization page
+#baseurl: "" # the subpath of your site, e.g. /blog
+#url: "https://alhabish.github.io" 
+# or url: "https://alhabish.com" if you have a custom domain name
+
+# Project page
+baseurl: "/embedded-course" # the subpath of your site, e.g. /blog
+url: "https://alhabish.github.io/embedded-course" # the base hostname & protocol for your site, e.g. http://example.com
+
+# According to
+# https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/
+#baseurl: "/embedded-course"
+#url: "https://alhabish.github.io"
+
+twitter_username: alhabish
+github_username:  alhabish
+linkedin_account: "khalidalghamidi"
+google_analytics: UA-106571814-1
+show_downloads: false
+
+# Build settings
+markdown: kramdown
+kramdown:
+    auto_ids: false
+

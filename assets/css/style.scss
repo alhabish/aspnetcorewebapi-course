@@ -1,0 +1,124 @@
+---
+---
+
+@import "jekyll-theme-minimal";
+
+/* -------------------------------------------------- 
+   sidebar styles
+-----------------------------------------------------*/
+aside {
+	padding: 0 1em 0;
+}
+aside h3 {
+	color: #4d4d4d;
+	font-size: 1.4em;
+	margin-top: 1em;
+	margin-bottom: .4em;
+}
+aside p {
+	margin-left: 1em;
+}
+aside ul {
+	list-style: none;
+	padding: 0;
+	margin:0;
+	margin-left: 1em;
+}
+aside li {
+	margin-bottom: 0.5em;
+}
+.social {
+	display: flex;
+	justify-content: space-around;
+}
+.social a {
+	text-indent: -9000em;
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+}
+.github {
+	background: url(../files/sidebar/github.svg) no-repeat;
+}
+.fb {
+	background: url(../files/sidebar/facebook.svg) no-repeat;
+}
+.linked {
+	background: url(../files/sidebar/linkedin.svg) no-repeat;
+}
+.twitter {
+	background: url(../files/sidebar/twitter.svg) no-repeat;
+}
+.mail {
+	background: url(../files/sidebar/mail.svg) no-repeat;
+}
+.rss {
+	background: url(../files/sidebar/rss.svg) no-repeat;
+}
+
+a.prev {
+  float: left;
+}
+
+a.prev:after {
+    content: " >"
+}
+
+a.next {
+  float: right;
+}
+
+a.next:before {
+  content: "< "
+}
+
+.post_ending_note {
+    display: block;
+    margin-top: 50px;
+    padding: 10px 20px;
+    color: #333;
+    background-color: #E6E6FA;
+    border-top: 0.1em solid #e1edf1;
+    border-bottom: 0.1em solid #e1edf1;
+}
+
+.note {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    color: #333;
+    background-color: #ffffb3;
+    border-top: 0.1em solid #e1edf1;
+    border-bottom: 0.1em solid #e1edf1;
+}
+
+.rule {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    color: black;
+    background-color: #ABEBC6;
+    border-top: 0.1em solid #e1edf1;
+    border-bottom: 0.1em solid #e1edf1;
+    font-weight:bold;
+    text-align: right;
+}
+
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+h3 {
+    margin-top: 40px;
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+h1 {
+    margin-top: 50px;
+}
