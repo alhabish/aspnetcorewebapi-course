@@ -1,9 +1,9 @@
 theme: jekyll-theme-minimal
 encoding: UTF-8
-title: لنتعلم برمجة الأنظمة المدمجة
+title: ASP.NET Core Web API Course
 email: alhabish@gmail.com
 #repository: "kalhabish/kalhabish.github.io"
-repository: "alhabish/embedded-course"
+repository: "alhabish/aspnetcorewebapi-course"
 author: خالد الغامدي
 lang: ar-SA
 locale: ar-SA
@@ -16,12 +16,12 @@ description: "كورس تعليمي يهدف الى اكسابك المعرفة 
 # or url: "https://alhabish.com" if you have a custom domain name
 
 # Project page
-baseurl: "/embedded-course" # the subpath of your site, e.g. /blog
-url: "https://alhabish.github.io/embedded-course" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/aspnetcorewebapi-course" # the subpath of your site, e.g. /blog
+url: "https://alhabish.github.io/aspnetcorewebapi-course" # the base hostname & protocol for your site, e.g. http://example.com
 
 # According to
 # https://byparker.com/blog/2014/clearing-up-confusion-around-baseurl/
-#baseurl: "/embedded-course"
+#baseurl: "/aspnetcorewebapi-course"
 #url: "https://alhabish.github.io"
 
 twitter_username: alhabish
