@@ -1,9 +1,10 @@
 ---
 layout: default
-title: "الدروس"
+title: "الصفحة الرئيسية"
 ---
 
 # قائمة الدروس
+
 <ul>
   {% assign posts = site.posts | sort: 'date' %}
   {% for post in posts %}

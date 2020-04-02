@@ -8,7 +8,7 @@ author: خالد الغامدي
 lang: ar-SA
 locale: ar-SA
 dir: rtl
-description: "كورس تعليمي يهدف الى اكسابك المعرفة اللازمة والمهارات التقنية المتعلقة ببرمجة وتطوير الأنظمة المدمجة وفهم خصائصها ومكوناتها"
+description: "تعلم برمجة الـ REST APIS بإستخدام تقنية ASP.NET Core"
 
 # User/Organization page
 #baseurl: "" # the subpath of your site, e.g. /blog

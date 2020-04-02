@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "1. مقدمة في الأنظمة المدمجة"
-date: 2017-09-27
+title: "1. تهيئة البيئة البرمجية"
+date: 2020-04-02
 lang: ar-SA
 index: 1
 comments: true
