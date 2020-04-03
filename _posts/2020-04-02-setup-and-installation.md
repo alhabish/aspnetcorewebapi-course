@@ -7,6 +7,51 @@ index: 1
 comments: true
 ---
 
+نعتمد في هذه الدورة على عدة برامج وتطبيقات يرجى تحميلها من الروابط التالية:
+
+* [Visual Studio Code](https://code.visualstudio.com)
+* [Git](https://git-scm.com)
+* [Postman](https://www.postman.com)
+* [.NET Core SDK](https://dotnet.microsoft.com/download)
+
+بالنسبة لـ .NET Core SDK يرجى إختيار التالي:
+
+{% include image.html url="assets/files/article_01/download-dotnetcore-sdk.jpg" border="1" %}
+
+نقوم بعد ذلك بتنصيب Setup جميع هذه البرامج.
+
+تأكد من أنه تم تنصيب Git بشكل صحيح عن طريق فتح الـ Command Prompt وكتابة:
+
+```bash
+git --version
+```
+
+فإن ظهرت رسالة تبين نسخة git المستخدمة فإن عملية التنصيب تمت بشكل صحيح:
+
+{% include image.html url="assets/files/article_01/git-version.jpg" border="1" %}
+
+ونقوم بنفس الشيئ مع الـ dotNET Core Framework:
+
+
+```bash
+dotnet --version
+```
+
+ومن المفترض أن يظهر لنا:
+
+
+{% include image.html url="assets/files/article_01/dotnetcore-version.jpg" border="1" %}
+
+
+
+### []()إنشاء المشروع
+
+يكون لدي في العادة مجلد إسمه repos أحفظ فيه جميع المشاريع البرمجية. فإن لم يكن موجود قم بالتالي:
+
+
+<!---
+
+
 من الممكن إعتبار الأنظمة المدمجة بأنها جميع أنظمة الحاسب الآلي ماعدا تلك المصنوعة للإستخدامات العامة والمتعددة general purpose كأجهزة الحاسب المنزلي وأجهزة اللابتوب حيث أنها تؤدي مهمة محددة specific purpose تم تطويرها من أجلها ولا يمكن، أو يصعب، تغييرها بعد ذلك. وعادة ما تكون هذه الأنظمة مدمجة أو متضمنة في نظام ميكانيكي أو كهربائي أكبر ومتحكمة به.  ويستفاد من هذه الأنظمة في الكثير من الصناعات والإلكترونيات والتي تشمل، وليست حصراً عليها فقط، الأجهزة الطبية، الأجهزة المنزلية، الألعاب، أنظمة الاتصالات، السيارات ... الخ. 
 
 ### []()خصائص الأنظمة المدمجة
@@ -45,3 +90,5 @@ comments: true
 * [Texas Instruments](http://www.ti.com/tool/EK-TM4C123GXL)
 * [Newark](http://www.newark.com/texas-instruments/ek-tm4c123gxl/eval-board-tm4c123g-tiva-c-launchpad/dp/73W9275)
 * [Farnell](http://uk.farnell.com/texas-instruments/ek-tm4c123gxl/tm4c123g-launchpad-tiva-c-eval/dp/2314937)
+
+-->
