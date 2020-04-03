@@ -48,6 +48,25 @@ dotnet --version
 
 يكون لدي في العادة مجلد إسمه repos أحفظ فيه جميع المشاريع البرمجية. فإن لم يكن موجود قم بالتالي:
 
+```bash
+cd /
+mkdir repos
+cd repos
+```
+
+نقوم بعد ذلك بإنشاء مجلد جديد بإسم `aspnetcorewebapiproject` يحتوي على مشروعنا:
+
+
+```bash
+mkdir aspnetcorewebapiproject
+cd aspnetcorewebapiproject
+```
+
+وبذلك سنكون داخل المجلد الجديد الذي أنشأناه:
+
+{% include image.html url="assets/files/article_01/pwd.png" border="1" %}
+
+
 
 <!---
 
