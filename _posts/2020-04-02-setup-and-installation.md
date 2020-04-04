@@ -45,7 +45,7 @@ dotnet --version
 {% include image.html url="assets/files/article_01/dotnetcore-version.jpg" border="1" %}
 
 
-### []()التعديل على بعض الإعدادات
+### []()تهيئة Git
 
 لنقم بتعديل بعض الإعدادات المتعلقة بـ git:
 
@@ -67,6 +67,31 @@ git config --list
 
 {% include image.html url="assets/files/article_01/git-config-list.png" border="1" %}
 
+
+### []()تهيئة VS Code
+
+قم بتحميل الإضافات extensions التالية:
+
+{% include image.html url="assets/files/article_01/vscode-ext-csharp.png" border="1" %}
+
+{% include image.html url="assets/files/article_01/vscode-ext-intellicode.png" border="1" %}
+
+{% include image.html url="assets/files/article_01/vscode-ext-gitlens.png" border="1" %}
+
+{% include image.html url="assets/files/article_01/vscode-ext-githistory.png" border="1" %}
+
+{% include image.html url="assets/files/article_01/vscode-ext-prettier.png" border="1" %}
+
+{% include image.html url="assets/files/article_01/vscode-ext-vscodeicons.png" border="1" %}
+
+وذلك عن طريق الخطوات التالية:
+
+* إختيار Extensions من القائمة اليسرى
+* كتابة إسم الإضافة extension في صندوق البحث
+* إختيار الإضافة
+* الضغط على زر Install
+
+{% include image.html url="assets/files/article_01/vscode-how-to-install-an-extension.png" border="1" %}
 
 
 ### []()إنشاء المشروع
