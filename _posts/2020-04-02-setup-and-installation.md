@@ -189,4 +189,16 @@ git commit -m "initial commit"
 
 {% include image.html url="assets/files/article_01/git-commit.png" border="1" %}
 
+نفتح المشروع في vs code بإستخدام الأمر التالي:
+
+```bash
+code .
+```
+
+إذا ظهرت لك النافذة التالية، إختر Yes حيث سيقوم vs code بإضافة بعض الأدوات الضرورية لبناء وتشغيل المشروع:
+
+{% include image.html url="assets/files/article_01/vscode-required-assets.png" border="1" %}
+
+وبدلاً من إستخدام الـ Command Prompt فإنه بإمكاننا إستخدام الـ Terminal الموجود في vs code بإستخدام الإختصار `Ctrl+Shift+`` 
+
 
