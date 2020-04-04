@@ -20,6 +20,9 @@ comments: true
 
 نقوم بعد ذلك بتنصيب Setup جميع هذه البرامج.
 
+
+### []()التأكد من صحة تنصيب البرامج
+
 تأكد من أنه تم تنصيب Git بشكل صحيح عن طريق فتح الـ Command Prompt وكتابة:
 
 ```bash
@@ -39,8 +42,30 @@ dotnet --version
 
 ومن المفترض أن يظهر لنا:
 
-
 {% include image.html url="assets/files/article_01/dotnetcore-version.jpg" border="1" %}
+
+
+### []()التعديل على بعض الإعدادات
+
+لنقم بتعديل بعض الإعدادات المتعلقة بـ git:
+
+
+```bash
+git config --global user.name "Khalid Alghamidi"
+git config --global user.email "kalhabish@gmail.com"
+git config --global apply.whitespace nowarn
+```
+
+السطر الأول والثاني تقوم بتغير الإسم والبريد الإلكتروني حيث يقوم git بربط هذه المعلومات بكل commit تقوم به.
+السطر الثاث لكي لا يظهر لك git بأن هنالك مشكلة في نهاية الأسطر بين الأنظمة المختلفة.
+
+بإمكانك رؤية جميع الإعدادات التي يستخدمها git بكتابة الأمر التالي:
+
+```bash
+git config --list
+```
+
+{% include image.html url="assets/files/article_01/git-config-list.png" border="1" %}
 
 
 
