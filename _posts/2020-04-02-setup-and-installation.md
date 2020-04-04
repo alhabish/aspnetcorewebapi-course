@@ -84,6 +84,8 @@ git config --list
 
 {% include image.html url="assets/files/article_01/vscode-ext-vscodeicons.png" border="1" %}
 
+{% include image.html url="assets/files/article_01/vscode-ext-bracketpair.png" border="1" %}
+
 وذلك عن طريق الخطوات التالية:
 
 * إختيار Extensions من القائمة اليسرى
@@ -94,7 +96,7 @@ git config --list
 {% include image.html url="assets/files/article_01/vscode-how-to-install-an-extension.png" border="1" %}
 
 
-### []()إنشاء المشروع
+## []()إنشاء المشروع
 
 يكون لدي في العادة مجلد إسمه repos أحفظ فيه جميع المشاريع البرمجية. فإن لم يكن موجود قم بالتالي:
 
@@ -116,48 +118,42 @@ cd aspnetcorewebapiproject
 
 {% include image.html url="assets/files/article_01/pwd.png" border="1" %}
 
+نقوم الآن بإنشاء git repository جديد في هذا المجلد:
 
+```bash
+git init
+```
 
-<!---
+نلاحظ أن git أنشأ مجلد جديد بإسم `.git` لإدارة المحتوى:
 
+{% include image.html url="assets/files/article_01/git-init.png" border="1" %}
 
-من الممكن إعتبار الأنظمة المدمجة بأنها جميع أنظمة الحاسب الآلي ماعدا تلك المصنوعة للإستخدامات العامة والمتعددة general purpose كأجهزة الحاسب المنزلي وأجهزة اللابتوب حيث أنها تؤدي مهمة محددة specific purpose تم تطويرها من أجلها ولا يمكن، أو يصعب، تغييرها بعد ذلك. وعادة ما تكون هذه الأنظمة مدمجة أو متضمنة في نظام ميكانيكي أو كهربائي أكبر ومتحكمة به.  ويستفاد من هذه الأنظمة في الكثير من الصناعات والإلكترونيات والتي تشمل، وليست حصراً عليها فقط، الأجهزة الطبية، الأجهزة المنزلية، الألعاب، أنظمة الاتصالات، السيارات ... الخ. 
+نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. وبما أننا سنستخدم VS Code فإنه بإمكاننا إستخدام الملف التالي:
 
-### []()خصائص الأنظمة المدمجة
-لهذه الأنظمة عدة خصائص نذكر منها:
-* مصممة لتنفيذ مهمة معينة وغرض واحد ويتم تنفيذ برنامجها بشكل مستمر ومتكرر
-* مصممة للإستهلاك القليل للطاقة 
-* مصممة للتعامل مع البيئة المحيطة حيث تحتوي على حساسات sensors لتلمس ما يحدث من حولها وقياس بعض الخصائص في البيئة المحيطة، و محركات actuators للتنفيذ والتأثير على ما حولها بناءاً على هذه المعطيات
-* لا يوجد لها في العادة واجهة للتعامل المباشر مع المستخدم وفي حالة وجودها فإنها تكون مبسطة للغاية
+<https://github.com/github/gitignore/blob/master/VisualStudio.gitignore>
 
-### []()المتحكمات Microcontrollers
-أحد مكونات هذه الأنظمة هو المتحكم microcontroller والذي يعتبر نظام حاسب آلي مصغر ويتكون من الأجزاء التالية:
-* المعالج CPU
-* الذاكرة العشوائية RAM والمستخدمة لحفظ البيانات المؤقته volatile بمعنى انها تُمسح إن أعدنا تشغيل النظام 
-* ذاكرة القراءة أو التخزين ROM والتي تستخدم لحفظ البرنامج والبيانات الثابتة constant data. وهذه الذاكرة non-volatile بمعنى انها تبقى حتى وإن لم تتوفر الطاقة للنظام
-* طرفيات للمدخلات والخرجات I/O peripherals
-* اتساع ذاكرة الوصول السريع registers، فهناك أنواع مثل 8bit، 16bit، 32bit، 64bit ... وهي تعني أن الذاكرة تحتمل حجم بيانات بهذه السعة، وإجمالاً، فإنه كلما زادت السعة زاد حجم البيانت التي يمكن التعامل معها في نفس المدة.
-* المنافذ التسلسلية Serial ports 
-* المؤقت Timer
-* سرعة الساعة Clock speed، وبشكل عام، كلما زادت سرعة الساعة كلما أمكن تنفيذ أوامر أكثر في مدة أقل
-* المحول التماثلي الرقمي Analog to Digital Converter - ADC
-* المحول الرقمي التماثلي Digital to Analog Converter - DAC
+انسخ محتوى هذا الملف وأنشئ ملف جديد في مجلد aspnetcorewebapiproject بإسم `.gitignore` (لا تنسى النقطة في البداية) وألصق المحتوى داخل هذا الملفز
 
-وسأقوم بشرح هذه الأجزاء بالتفصيل في مقالات قادمة بإذن الله
+لو أستخدمت الأمر التالي الآن من الـ Command Prompt لرأيت بأن git يعلم عن الملف الجديد ولكنه لا يراقبه:
 
-### []()إختيار المتحكم المناسب لهذا الكورس
-الخاصية الأولى التي ينبغي النظر اليها عند إختيار المتحكم هو إختيار الهيكلة instruction set architecture (ISA)  المناسبة. أمثلة عليها تشمل 8051، PIC، AVR، MSP430 و ARM Cortex M. وقد تم إختيار الهيكلة الأخيرة حيث أنها تعتبر الأكثر إنتشاراً خاصة  تلك من نوع الـ 32bit. وبعد حصرها على الهيكلة المناسبة ننظر الى ما يلي:
-* سرعة المعالج
-* حجم الذاكرة العشوائية RAM وذاكرة القراءة أو التخزين ROM 
-* أنواع الـ IO Pins المتوفره في المتحكم، وأذكر منها I2C، UART، SPI، GPIO و USB
-* كمية الطاقة التي يستهلكها المتحكم
+```bash
+git status
+```
 
-بنائاً على هذه المعطيات سيتضح لنا فيما بعد بإذن الله أن TM4C123 Tiva LaunchPad مناسبة جداً وتحقق أهم الإشتراطات
+{% include image.html url="assets/files/article_01/git-status-before-add.png" border="1" %}
 
-### []()شراء المتحكم
-يمكن شراء المتحكم من عدة مصادر، ومنها:
-* [Texas Instruments](http://www.ti.com/tool/EK-TM4C123GXL)
-* [Newark](http://www.newark.com/texas-instruments/ek-tm4c123gxl/eval-board-tm4c123g-tiva-c-launchpad/dp/73W9275)
-* [Farnell](http://uk.farnell.com/texas-instruments/ek-tm4c123gxl/tm4c123g-launchpad-tiva-c-eval/dp/2314937)
+ثم ننفذ الأمر التالي لإضافة الملف الجديد الى منطقة الـ staging الخاصة بـ git:
 
--->
+```bash
+git add .
+```
+
+{% include image.html url="assets/files/article_01/git-status-after-add.png" border="1" %}
+
+والآن نضيفها للـ local repository بإستخدام الأمر التالي:
+
+```bash
+git commit -m "initial commit"
+```
+
+{% include image.html url="assets/files/article_01/git-commit.png" border="1" %}
