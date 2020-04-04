@@ -95,8 +95,9 @@ git config --list
 
 {% include image.html url="assets/files/article_01/vscode-how-to-install-an-extension.png" border="1" %}
 
+## []()تهيئة المشروع
 
-## []()إنشاء المشروع
+## تهيئة المشروع
 
 يكون لدي في العادة مجلد إسمه repos أحفظ فيه جميع المشاريع البرمجية. فإن لم يكن موجود قم بالتالي:
 
@@ -128,13 +129,43 @@ git init
 
 {% include image.html url="assets/files/article_01/git-init.png" border="1" %}
 
-نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. وبما أننا سنستخدم VS Code فإنه بإمكاننا إستخدام الملف التالي:
+نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. ولنقوم بذلك نستخدم الأمر التالي:
+
+```bash
+dotnet new gitignore
+```
+
+<!--
 
 <https://github.com/github/gitignore/blob/master/VisualStudio.gitignore>
 
 انسخ محتوى هذا الملف وأنشئ ملف جديد في مجلد aspnetcorewebapiproject بإسم `.gitignore` (لا تنسى النقطة في البداية) وألصق المحتوى داخل هذا الملفز
 
-لو أستخدمت الأمر التالي الآن من الـ Command Prompt لرأيت بأن git يعلم عن الملف الجديد ولكنه لا يراقبه:
+-->
+
+## []()إنشاء المشروع
+
+سنستخدم الآن الأداة `dotnet` لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشائها إستخدم الأمر التالي:
+
+```bash
+dotnet new -h
+```
+
+{% include image.html url="assets/files/article_01/dotnet-new-h.png" border="1" %}
+
+المشروع الذي نرغب في إنشاؤه من نوع ASP.NET Core Web API ولذلك ننفذ الأمر التالي:
+
+```bash
+dotnet new webapi
+```
+
+{% include image.html url="assets/files/article_01/dotnet-new-webapi.png" border="1" %}
+
+بإمكاننا أن نرى الملفات الجديدة التي تم إنشاؤها:
+
+{% include image.html url="assets/files/article_01/ls-after-creating-project.png" border="1" %}
+
+ولو أستخدمت الأمر التالي لرأيت بأن git يعلم عن الملفات الجديدة ولكنه لا يراقبها:
 
 ```bash
 git status
@@ -142,7 +173,7 @@ git status
 
 {% include image.html url="assets/files/article_01/git-status-before-add.png" border="1" %}
 
-ثم ننفذ الأمر التالي لإضافة الملف الجديد الى منطقة الـ staging الخاصة بـ git:
+ثم ننفذ الأمر التالي لإضافة الملفات الجديدة الى منطقة الـ staging الخاصة بـ git:
 
 ```bash
 git add .
@@ -157,3 +188,5 @@ git commit -m "initial commit"
 ```
 
 {% include image.html url="assets/files/article_01/git-commit.png" border="1" %}
+
+
