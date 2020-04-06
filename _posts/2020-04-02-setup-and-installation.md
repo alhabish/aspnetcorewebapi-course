@@ -95,9 +95,7 @@ git config --list
 
 {% include image.html url="assets/files/article_01/vscode-how-to-install-an-extension.png" border="1" %}
 
-## []()تهيئة المشروع
-
-## تهيئة المشروع
+## إنشاء المشروع
 
 يكون لدي في العادة مجلد إسمه repos أحفظ فيه جميع المشاريع البرمجية. فإن لم يكن موجود قم بالتالي:
 
@@ -129,22 +127,6 @@ git init
 
 {% include image.html url="assets/files/article_01/git-init.png" border="1" %}
 
-نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. ولنقوم بذلك نستخدم الأمر التالي:
-
-```bash
-dotnet new gitignore
-```
-
-<!--
-
-<https://github.com/github/gitignore/blob/master/VisualStudio.gitignore>
-
-انسخ محتوى هذا الملف وأنشئ ملف جديد في مجلد aspnetcorewebapiproject بإسم `.gitignore` (لا تنسى النقطة في البداية) وألصق المحتوى داخل هذا الملفز
-
--->
-
-## []()إنشاء المشروع
-
 سنستخدم الآن الأداة `dotnet` لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشائها إستخدم الأمر التالي:
 
 ```bash
@@ -152,6 +134,12 @@ dotnet new -h
 ```
 
 {% include image.html url="assets/files/article_01/dotnet-new-h.png" border="1" %}
+
+نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. ولنقوم بذلك نستخدم الأمر التالي:
+
+```bash
+dotnet new gitignore
+```
 
 المشروع الذي نرغب في إنشاؤه من نوع ASP.NET Core Web API ولذلك ننفذ الأمر التالي:
 
@@ -199,6 +187,20 @@ code .
 
 {% include image.html url="assets/files/article_01/vscode-required-assets.png" border="1" %}
 
-وبدلاً من إستخدام الـ Command Prompt فإنه بإمكاننا إستخدام الـ Terminal الموجود في vs code بإستخدام الإختصار `Ctrl+Shift+`` 
+وبدلاً من إستخدام الـ Command Prompt فإنه بإمكاننا إستخدام الـ Terminal الموجود في vs code بإستخدام الإختصار:
+
+
+```bash
+Ctrl+Shift+`
+```
+
+{% include image.html url="assets/files/article_01/vscode-terminal.png" border="1" %}
+
+
+
+
+
+
+ 
 
 
