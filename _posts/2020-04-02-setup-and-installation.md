@@ -196,11 +196,27 @@ Ctrl+Shift+`
 
 {% include image.html url="assets/files/article_01/vscode-terminal.png" border="1" %}
 
+لنقم الآببناء المشروع ثم تشغيله:
 
+```bash
+dotnet build
+dotnet run
+```
 
+نتيجة تنفيذ الأمر `dotnet run` هي:
 
+{% include image.html url="assets/files/article_01/dotnet-run.png" border="1" %}
 
+نلاحظ انه بإمكاننا الوصول الى الخدمة عبر البروتوكول http أو https. سنستخدم عنوان الـ https وسنضيف اليه WeatherForecast لنصل الى هذا الـ Controller:
 
- 
+```bash
+https://localhost:5001/WeatherForecast
+```
 
+{% include image.html url="assets/files/article_01/weatherforcast.png" border="1" %}
 
+يمكن إيقاف المشروع من Terminal في VS Code بالأوامر التالية:
+
+`Ctrl+C`
+
+بذلك أنشأنا مشروع جديد وتأكدنا من أنه يعمل بشكل صحيح.
