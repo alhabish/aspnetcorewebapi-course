@@ -189,7 +189,6 @@ code .
 
 وبدلاً من إستخدام الـ Command Prompt فإنه بإمكاننا إستخدام الـ Terminal الموجود في vs code بإستخدام الإختصار:
 
-
 ```bash
 Ctrl+Shift+`
 ```
@@ -218,5 +217,12 @@ https://localhost:5001/WeatherForecast
 يمكن إيقاف المشروع من Terminal في VS Code بالأوامر التالية:
 
 `Ctrl+C`
+
+وبما أننا لم نعد بحاجة الـ WeatherForecastController سنقوم بحذف الملف Controllers/WeatherForecastController.cs والملف WeatherForecast.cs ثم تنفيذ أوامر git التالية:
+
+```bash
+git add .
+git commit -m "deletes Controllers/WeatherForecastController.cs & /WeatherForecast.cs"
+```
 
 بذلك أنشأنا مشروع جديد وتأكدنا من أنه يعمل بشكل صحيح.
