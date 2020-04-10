@@ -11,7 +11,7 @@ comments: true
 
 قاعدة البيانات المستخدمة هي Microsoft SQL Server والنسخة التي سنقوم بتحميلها SQL Server 2019 Developer وذلك من الرابط التالي:
 
-<https://www.microsoft.com/en-us/sql-server/sql-server-downloads>
+[SQL Server 2019 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
 عند الإنتهاء من ثبيت البرنامج إحفظ النص الموجود في الـ `CONNECTION STRING` جانباً حيث سنحتاج اليه فيما بعد:
 
@@ -21,9 +21,7 @@ comments: true
 
 ولإدارة قاعدة البيانات هذه والتعامل معها سنستخدم `Azure Data Studio` والتي يمكن تحميلها من الرابط التالي:
 
-<https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio>
-
-
+[Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio)
 
 بعد تنصيب هذه البرامج نقوم بإنشاء مجلد جديد بإسم `Entities` وبداخله ملف Employee.cs:
 
@@ -146,16 +144,52 @@ dotnet tool install --global dotnet-aspnet-codegenerator
 
 والآن سنقوم بإنشاء الكنترولر الجديد:
 
+```bash
 dotnet aspnet-codegenerator controller -name EmployeesController -async -api -m Employee -dc MainDbContext -outDir Controllers
+```
 
 وفيما يلي تفصيل للأجزاء المختلفة للأمر السابق:
 
-
-| القيمة | الإعداد | الوصف|
+| الأمر | القيمة | الوصف|
 |---:|---:|---:|
-| name | EmployeesController |  إسم الكنترولر المراد إنشاؤه |
-| async |   | جعل الأوامر غير متزامنه asynchronous |
-| api |   | لعدم إنشاء Views |
-| m | Employee | إسم الـ model الذي سيستخدم |
-| dc | MainDbContext | الـ database context المستخدم |
-| outDir | Controllers | المجلد الذي سيتم وضع الكنترولر فيه |
+| _name_ | EmployeesController |  إسم الكنترولر المراد إنشاؤه |
+| _async_ |   | جعل الأوامر غير متزامنه asynchronous |
+| _api_ |   | لعدم إنشاء Views |
+| _m_ | Employee | إسم الـ model الذي سيستخدم |
+| _dc_ | MainDbContext | الـ database context المستخدم |
+| _outDir_ | Controllers | المجلد الذي سيتم وضع الكنترولر فيه |
+
+بإمكاننا أن نرى بأنه تم إنشاء ملف جديد بإسم EmployeesController.cs داخل المجلد Controllers:
+
+{% include image.html url="assets/files/article_02/vs-new-employeescontroller.png" border="1" %}
+
+نلاحظ أنه تم إنشاء الـ actions التالية:
+
+| Verb | Url| الوصف|
+|---:|---:|---:|
+| GET | api/employees | لإسترجاع قائمة بجميع الموظفين |
+| GET | api/employees/{id} | لإسترجاع معلومات موظف معين |
+| PUT | api/employees/{id} | لتعديل معلومات موظف |
+| POST | api/employees | لإضافة معلومات موظف جديد |
+| DELETE | api/employees/{id} | لحذف معلومات موظف |
+
+هتالك تعديل بسيط يستحسن القيام به على الملف EmployeesController.cs في السطر 86 للإعتماد على الـ concrete types وليس على نص hard coded:
+
+```csharp
+return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
+```
+
+لتصبح:
+
+```csharp
+return CreatedAtAction(nameof(GetEmployee), new { id = employee.Id }, employee);
+```
+
+لنقم الآن ببناء المشروع ثم تشغيله:
+
+```bash
+dotnet build
+dotnet run
+```
+
+
