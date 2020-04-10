@@ -1,6 +1,6 @@
-
+---
 layout: post
-title: "2. Entities and Models"
+title: "2. Entity Framework"
 date: 2020-04-07
 lang: ar-SA
 index: 1
