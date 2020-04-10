@@ -135,3 +135,27 @@ dotnet ef database update
 
 {% include image.html url="assets/files/article_02/ads-employees-select-top-1000.png" border="1" %}
 
+### إضافة كنترولر جديد EmployeesController
+
+سنستفيد من أداة الـ dotnet في توليد generate كنترولر جديد بإسم EmployeesController. وللقيام بذلك علينا أولاً إضافة الخاصية لهذه الأداة بتنفيذ الأوامر التالي:
+
+```bash
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+
+والآن سنقوم بإنشاء الكنترولر الجديد:
+
+dotnet aspnet-codegenerator controller -name EmployeesController -async -api -m Employee -dc MainDbContext -outDir Controllers
+
+وفيما يلي تفصيل للأجزاء المختلفة للأمر السابق:
+
+
+| القيمة | الإعداد | الوصف|
+|---:|---:|---:|
+| name | EmployeesController |  إسم الكنترولر المراد إنشاؤه |
+| async |   | جعل الأوامر غير متزامنه asynchronous |
+| api |   | لعدم إنشاء Views |
+| m | Employee | إسم الـ model الذي سيستخدم |
+| dc | MainDbContext | الـ database context المستخدم |
+| outDir | Controllers | المجلد الذي سيتم وضع الكنترولر فيه |
