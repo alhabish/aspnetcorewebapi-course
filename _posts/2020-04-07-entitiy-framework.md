@@ -192,4 +192,57 @@ dotnet build
 dotnet run
 ```
 
+## تجربة الكنترولر الجديد EmployeesController
 
+سنستخد postman للقيام بذلك، ولكن أول ما نقوم به هو الذهاب الى File ثم Settings والتأكد من قيمة الإعداد التالي:
+
+`SSL certificate verification = OFF`
+
+{% include image.html url="assets/files/article_02/postman-disable-ssl-certificate-verification.png" border="1" %}
+
+### إضافة معلومات موظف جديد
+
+عند القيام بالتجربة نرى أن الـ Http Status Code المسترجع هو 201 Created أي أنه تم إنشاء معلومات موظف جديد بشكل صحيح:
+
+{% include image.html url="assets/files/article_02/postman-post-employees.png" border="1" %}
+
+قم بإضافة معلومات موظف جديد لنتمكن من تكملة باقي الإختبارات:
+
+{% include image.html url="assets/files/article_02/postman-post-employees-additional-employee.png" border="1" %}
+
+### إسترجاع معلومات جميع الموظفين
+
+نرى أن الـ Http Status Code المسترجع هو 200 Ok أي أنه تم تنفيذ العملية بشكل صحيح:
+
+{% include image.html url="assets/files/article_02/postman-get-all-employees.png" border="1" %}
+
+### إسترجاع معلومات موظف معين
+
+نرى أن الـ Http Status Code المسترجع هو 200 Ok أي أنه تم تنفيذ العملية بشكل صحيح:
+
+{% include image.html url="assets/files/article_02/postman-get-specific-employee.png" border="1" %}
+
+### تعديل معلومات موظف معين
+
+نرى أن الـ Http Status Code المسترجع هو  204 No Content أي أنه تم تنفيذ العملية بشكل صحيح:
+
+{% include image.html url="assets/files/article_02/postman-update-employee-info.png" border="1" %}
+
+بإمكانك الإستعلام عن معلومات الموظف لتتأكد بأنه تم تعديل المعلومات:
+
+`https://localhost:5001/api/employees/2`
+
+
+
+
+### حذف معلومات موظف معين
+
+نرى أن الـ Http Status Code المسترجع هو  200 Ok أي أنه تم تنفيذ العملية بشكل صحيح:
+
+{% include image.html url="assets/files/article_02/postman-delete-employee-info.png" border="1" %}
+
+بإمكانك الإستعلام عن معلومات الموظف لتتأكد بأنه تم فعلاً حذف المعلومات المتعلقة به:
+
+{% include image.html url="assets/files/article_02/postman-get-specific-employee-after-deletion.png" border="1" %}
+
+نرى أن الـ Http Status Code المسترجع هو  404 Not Found أي أنه لم يتم إيجاد الموظف بهذا الرقم وهذا صحيح.
