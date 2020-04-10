@@ -1,4 +1,4 @@
----
+
 layout: post
 title: "2. Entities and Models"
 date: 2020-04-07
@@ -13,9 +13,17 @@ comments: true
 
 <https://www.microsoft.com/en-us/sql-server/sql-server-downloads>
 
-ولإدارة قاعدة البيانات هذه والتعامل معها سنستخدم Azure Data Studio والتي يمكن تحميلها من الرابط التالي:
+عند الإنتهاء من ثبيت البرنامج إحفظ النص الموجود في الـ `CONNECTION STRING` جانباً حيث سنحتاج اليه فيما بعد:
+
+{% include image.html url="assets/files/article_02/sql-server-installation-config.png" border="1" %}
+
+`Server=localhost;Database=master;Trusted_Connection=True;`
+
+ولإدارة قاعدة البيانات هذه والتعامل معها سنستخدم `Azure Data Studio` والتي يمكن تحميلها من الرابط التالي:
 
 <https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio>
+
+
 
 بعد تنصيب هذه البرامج نقوم بإنشاء مجلد جديد بإسم `Entities` وبداخله ملف Employee.cs:
 
@@ -64,7 +72,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Tools
 services.AddDbContext<DbContexts.MainDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MainDbContext")));
 ```
 
-وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانت ConnectionStrings بإسم MainDbContext:
+وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانت ConnectionStrings بإسم MainDbContext وهنا نستفيد من معلومات الإتصال بقاعدة البيانات التي نسخناها سابقاً ولكننا سنستبدل قاعدة البيانات `master` بـ `MainDb`:
 
 ```json
 {
@@ -77,10 +85,9 @@ services.AddDbContext<DbContexts.MainDbContext>(options => options.UseSqlServer(
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "MainDbContext": "Data Source=(localdb)\\MSSQLSERVER;Initial Catalog=Employees;Integrated Security=True;"
+    "MainDbContext": "Server=localhost;Database=MainDb;Trusted_Connection=True;"
   }    
 }
-
 ```
 
 نضيف الآن أدة dotnet-ef
@@ -89,13 +96,42 @@ services.AddDbContext<DbContexts.MainDbContext>(options => options.UseSqlServer(
 dotnet tool install --global dotnet-ef
 ```
 
-نضيف أوامر التعديل على قاعدة البيانات ثم ننفذ الأمر:
+نضيف أوامر التعديل على قاعدة البيانات:
 
 ```csharp
 dotnet ef migrations add InitialCreate
 ```
 
+نلاحظ إنه تم إنشاء مجلد جديد بإسم `Migrations` وبه الأوامر التي سيتم تنفيذها للتعديل على قاعدة البيانات. نقوم الآن بتنفيذ الأومر:
 
 ```csharp
 dotnet ef database update
 ```
+
+نستخدم الآن `Azure Data Studio` لرؤية التعديلات التي تم تنفيذها. من القائمة في اليسار نختار `Connection` ثم `New Connection`:
+
+{% include image.html url="assets/files/article_02/ads-new-connection.png" border="1" %}
+
+سنقوم بعد ذلك بتعبئة معلومات الإتصال فى النافذة الجديدة:
+
+{% include image.html url="assets/files/article_02/ads-new-connection-details.png" border="1" %}
+
+والمعلومات هذه تم أخذها من التالي:
+
+```json
+  "ConnectionStrings": {
+    "MainDbContext": "Server=localhost;Database=MainDb;Trusted_Connection=True;"
+  }   
+```
+
+نضغط بعد ذلك على زر `Connect` ثم يظهر لنا أنه تم إنشاء جدولين جديدين في قاعدة البيانات `Employees`:
+
+{% include image.html url="assets/files/article_02/ads-maindb-created.png" border="1" %}
+
+* `_EFMigrationsHistory` وتحتفظ بكل التغييرات التي تمت على قاعدة البيانات هذه من Entity Framework
+* `Employees` الجدول الذي يقابل الـ `class Employee` الذي أنشأناه في الكود
+
+بإمكاننا أن نرى أن جدول `Employees` خالي ولم يتم تعبئته بالبيانات:
+
+{% include image.html url="assets/files/article_02/ads-employees-select-top-1000.png" border="1" %}
+
