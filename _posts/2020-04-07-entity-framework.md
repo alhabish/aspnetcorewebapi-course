@@ -278,13 +278,13 @@ namespace aspnetcorewebapiproject.Controllers
 
 نلاحظ أنه تم إنشاء الـ actions التالية:
 
-| Verb | Url| الوصف|
-|---:|---:|---:|
-| GET | api/employees | لإسترجاع قائمة بجميع الموظفين |
-| GET | api/employees/{id} | لإسترجاع معلومات موظف معين |
-| PUT | api/employees/{id} | لتعديل معلومات موظف |
-| POST | api/employees | لإضافة معلومات موظف جديد |
-| DELETE | api/employees/{id} | لحذف معلومات موظف |
+| Verb | Url| الوصف| Request Body | Response Body |
+|---:|---:|---:|---:|---:|
+| GET | api/employees | لإسترجاع قائمة بجميع الموظفين | - | قائمة بالموظفين |
+| GET | api/employees/{id} | لإسترجاع معلومات موظف معين | - | معلومات موظف |
+| PUT | api/employees/{id} | لتعديل معلومات موظف | معلومات موظف | - |
+| POST | api/employees | لإضافة معلومات موظف جديد | معلومات موظف | معلومات موظف |
+| DELETE | api/employees/{id} | لحذف معلومات موظف | - | معلومات موظف |
 
 هتالك تعديل بسيط يستحسن القيام به على الملف EmployeesController.cs في السطر 86 للإعتماد على الـ concrete types وليس على نص hard coded:
 
