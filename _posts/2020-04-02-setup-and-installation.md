@@ -14,27 +14,25 @@ comments: true
 * [Postman](https://www.postman.com)
 * [.NET Core SDK](https://dotnet.microsoft.com/download)
 
-بالنسبة لـ .NET Core SDK يرجى إختيار التالي:
+بالنسبة لـ NET Core SDK. يرجى إختيار التالي:
 
 {% include image.html url="assets/files/article_01/download-dotnetcore-sdk.jpg" border="1" %}
 
-نقوم بعد ذلك بتنصيب Setup جميع هذه البرامج.
+نقوم بعد ذلك بتثبيت Setup جميع هذه البرامج.
 
+### التأكد من صحة تثبيت البرامج
 
-### []()التأكد من صحة تنصيب البرامج
-
-تأكد من أنه تم تنصيب Git بشكل صحيح عن طريق فتح الـ Command Prompt وكتابة:
+تأكد من أنه تم تثبيت Git بشكل صحيح عن طريق فتح الـ Command Prompt وكتابة:
 
 ```bash
 git --version
 ```
 
-فإن ظهرت رسالة تبين نسخة git المستخدمة فإن عملية التنصيب تمت بشكل صحيح:
+فإن ظهرت رسالة تبين نسخة git المستخدمة فإن عملية التثبيت تمت بشكل صحيح:
 
 {% include image.html url="assets/files/article_01/git-version.jpg" border="1" %}
 
-ونقوم بنفس الشيئ مع الـ dotNET Core Framework:
-
+ونقوم بنفس الشيئ مع الـ NET Core Framework. :
 
 ```bash
 dotnet --version
@@ -44,11 +42,9 @@ dotnet --version
 
 {% include image.html url="assets/files/article_01/dotnetcore-version.jpg" border="1" %}
 
+## تهيئة Git
 
-### []()تهيئة Git
-
-لنقم بتعديل بعض الإعدادات المتعلقة بـ git:
-
+لنقم الآن بتعديل بعض الإعدادات المتعلقة بـ git:
 
 ```bash
 git config --global user.name "Khalid Alghamidi"
@@ -57,9 +53,9 @@ git config --global apply.whitespace nowarn
 ```
 
 السطر الأول والثاني تقوم بتغير الإسم والبريد الإلكتروني حيث يقوم git بربط هذه المعلومات بكل commit تقوم به.
-السطر الثاث لكي لا يظهر لك git بأن هنالك مشكلة في نهاية الأسطر بين الأنظمة المختلفة.
+السطر الثاث نفذناه لكي لا يظهر لك git بأن هنالك مشكلة في نهاية الأسطر بين الأنظمة المختلفة.
 
-بإمكانك رؤية جميع الإعدادات التي يستخدمها git بكتابة الأمر التالي:
+بإمكانك رؤية جميع الإعدادات التي المستخدمة في git بكتابة الأمر التالي:
 
 ```bash
 git config --list
@@ -67,8 +63,7 @@ git config --list
 
 {% include image.html url="assets/files/article_01/git-config-list.png" border="1" %}
 
-
-### []()تهيئة VS Code
+## تهيئة VS Code
 
 قم بتحميل الإضافات extensions التالية:
 
@@ -107,7 +102,6 @@ cd repos
 
 نقوم بعد ذلك بإنشاء مجلد جديد بإسم `aspnetcorewebapiproject` يحتوي على مشروعنا:
 
-
 ```bash
 mkdir aspnetcorewebapiproject
 cd aspnetcorewebapiproject
@@ -123,11 +117,11 @@ cd aspnetcorewebapiproject
 git init
 ```
 
-نلاحظ أن git أنشأ مجلد جديد بإسم `.git` لإدارة المحتوى:
+نلاحظ أن git أنشأ مجلد جديد بإسم git. لإدارة المحتوى:
 
 {% include image.html url="assets/files/article_01/git-init.png" border="1" %}
 
-سنستخدم الآن الأداة `dotnet` لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشائها إستخدم الأمر التالي:
+سنستخدم الآن الأداة dotnet لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشائها إستخدم الأمر التالي:
 
 ```bash
 dotnet new -h
@@ -135,7 +129,7 @@ dotnet new -h
 
 {% include image.html url="assets/files/article_01/dotnet-new-h.png" border="1" %}
 
-نحن الآن بحاجة الى ملف `.gitignore` والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها. ولنقوم بذلك نستخدم الأمر التالي:
+نحن الآن بحاجة الى ملف gitignore. والتى توضح لـ git ماهي الملفات التي يجب عليه عدم متابعتها وإدارتها. ولنقوم بذلك نستخدم الأمر التالي:
 
 ```bash
 dotnet new gitignore
@@ -195,7 +189,7 @@ Ctrl+Shift+`
 
 {% include image.html url="assets/files/article_01/vscode-terminal.png" border="1" %}
 
-لنقم الآببناء المشروع ثم تشغيله:
+لنقم الآن ببناء المشروع ثم تشغيله:
 
 ```bash
 dotnet build
@@ -216,13 +210,15 @@ https://localhost:5001/WeatherForecast
 
 يمكن إيقاف المشروع من Terminal في VS Code بالأوامر التالية:
 
-`Ctrl+C`
+```bash
+Ctrl+C
+```
 
-وبما أننا لم نعد بحاجة الـ WeatherForecastController سنقوم بحذف الملف Controllers/WeatherForecastController.cs والملف WeatherForecast.cs ثم تنفيذ أوامر git التالية:
+وبما أننا لم نعد بحاجة الـ WeatherForecastController سنقوم بحذف الملف WeatherForecast.cs والملف  WeatherForecastController.cs داخل المجلد Controllers ثم تنفيذ أوامر git التالية:
 
 ```bash
 git add .
-git commit -m "deletes Controllers/WeatherForecastController.cs & /WeatherForecast.cs"
+git commit -m "deletes WeatherForecast related files"
 ```
 
 بذلك أنشأنا مشروع جديد وتأكدنا من أنه يعمل بشكل صحيح.
