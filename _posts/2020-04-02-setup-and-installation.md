@@ -47,8 +47,8 @@ dotnet --version
 لنقم الآن بتعديل بعض الإعدادات المتعلقة بـ git:
 
 ```bash
-git config --global user.name "Khalid Alghamidi"
-git config --global user.email "kalhabish@gmail.com"
+git config --global user.name "{your name}"
+git config --global user.email "{your email}"
 git config --global apply.whitespace nowarn
 ```
 
