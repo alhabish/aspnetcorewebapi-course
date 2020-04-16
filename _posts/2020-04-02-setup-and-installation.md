@@ -47,15 +47,15 @@ dotnet --version
 لنقم الآن بتعديل بعض الإعدادات المتعلقة بـ git:
 
 ```bash
-git config --global user.name "{your name}"
-git config --global user.email "{your email}"
+git config --global user.name "YOUR_NAME"
+git config --global user.email "YOUR_EMAIL"
 git config --global apply.whitespace nowarn
 ```
 
 السطر الأول والثاني تقوم بتغير الإسم والبريد الإلكتروني حيث يقوم git بربط هذه المعلومات بكل commit تقوم به.
 السطر الثاث نفذناه لكي لا يظهر لك git بأن هنالك مشكلة في نهاية الأسطر بين الأنظمة المختلفة.
 
-بإمكانك رؤية جميع الإعدادات التي المستخدمة في git بكتابة الأمر التالي:
+بإمكانك رؤية جميع الإعدادات المستخدمة في git بكتابة الأمر التالي:
 
 ```bash
 git config --list
@@ -121,7 +121,7 @@ git init
 
 {% include image.html url="assets/files/article_01/git-init.png" border="1" %}
 
-سنستخدم الآن الأداة dotnet لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشائها إستخدم الأمر التالي:
+سنستخدم الآن الأداة dotnet لإنشاء المشروع. ولرؤية أنواع المشاريع التي بإمكان هذه الأداة إنشاؤها إستخدم الأمر التالي:
 
 ```bash
 dotnet new -h
