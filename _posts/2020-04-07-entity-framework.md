@@ -7,9 +7,7 @@ index: 2
 comments: true
 ---
 
-الخدمة web service التي سنقدمها تتعلق بالموظفين وكل ما يخص إضافة / تعديل / الإستعلام عن بياناتهم. 
-
-قاعدة البيانات المستخدمة هي Microsoft SQL Server والنسخة التي سنقوم بتحميلها SQL Server 2019 Developer وذلك من الرابط التالي:
+الخدمة web service التي سنقدمها تتعلق بالموظفين وكل ما يخص إضافة / تعديل / الإستعلام عن بياناتهم. قاعدة البيانات المستخدمة هي Microsoft SQL Server والنسخة التي سنقوم بتحميلها هي SQL Server 2019 Developer وذلك من الرابط التالي:
 
 [SQL Server 2019 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
