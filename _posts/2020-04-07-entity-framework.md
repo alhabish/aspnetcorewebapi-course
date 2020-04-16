@@ -90,7 +90,7 @@ services.AddDbContext<DbContexts.MainDbContext>(
 );
 ```
 
-وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانت ConnectionStrings بإسم MainDbContext وهنا نستفيد من معلومات الإتصال بقاعدة البيانات التي نسخناها سابقاً ولكننا سنستبدل قاعدة البيانات master بـ MainDb:
+وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانات ConnectionStrings بإسم MainDbContext وهنا نستفيد من معلومات الإتصال بقاعدة البيانات التي نسخناها سابقاً ولكننا سنستبدل قاعدة البيانات master بـ MainDb:
 
 ```json
 {
@@ -313,7 +313,7 @@ namespace aspnetcorewebapiproject.Controllers
 | **POST** | *api/employees* | لإضافة معلومات موظف جديد | معلومات موظف | معلومات موظف |
 | **DELETE** | *api/employees/{id}* | لحذف معلومات موظف | - | معلومات موظف |
 
-هتالك تعديل بسيط يستحسن القيام به على الملف EmployeesController.cs في السطر 86 للإعتماد على الـ concrete types وليس على نص hard coded:
+هنالك تعديل بسيط يستحسن القيام به على الملف EmployeesController.cs في السطر 86 للإعتماد على الـ concrete types وليس على نص hard coded:
 
 ```csharp
 return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
@@ -388,7 +388,7 @@ https://localhost:5001/api/employees/2
 
 نرى أن الـ Http Status Code المسترجع هو  404 Not Found أي أنه لم يتم إيجاد الموظف بهذا الرقم وهذا صحيح.
 
-والـن لا تنسى إضافة التغييرات الى git:
+والآن لا تنسى إضافة التغييرات الى git:
 
 ```bash
 git add .
