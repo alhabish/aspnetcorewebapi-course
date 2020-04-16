@@ -8,7 +8,7 @@ author: خالد الغامدي
 lang: ar-SA
 locale: ar-SA
 dir: rtl
-description: "تعلم برمجة الـ REST APIS بإستخدام تقنية ASP.NET Core"
+description: "تعلم برمجة الـ RESTful services أو الـ Web APIs بإستخدام  ASP.NET Core بطريقة مفصلة وتدريجية"
 
 # User/Organization page
 #baseurl: "" # the subpath of your site, e.g. /blog
