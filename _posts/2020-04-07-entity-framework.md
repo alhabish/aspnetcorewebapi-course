@@ -7,23 +7,25 @@ index: 2
 comments: true
 ---
 
-الخدمة service التي سنقدمها تتعلق بالموظفين وكل ما يتغلق بالإضافة/ التعديل / الإستعلام عن بياناتهم. 
+الخدمة web service التي سنقدمها تتعلق بالموظفين وكل ما يخص إضافة / تعديل / الإستعلام عن بياناتهم. 
 
 قاعدة البيانات المستخدمة هي Microsoft SQL Server والنسخة التي سنقوم بتحميلها SQL Server 2019 Developer وذلك من الرابط التالي:
 
 [SQL Server 2019 Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 
-عند الإنتهاء من ثبيت البرنامج إحفظ النص الموجود في الـ `CONNECTION STRING` جانباً حيث سنحتاج اليه فيما بعد:
+عند الإنتهاء من تثبيت البرنامج إحفظ النص الموجود في الـ CONNECTION STRING جانباً حيث سنحتاج اليه فيما بعد:
 
 {% include image.html url="assets/files/article_02/sql-server-installation-config.png" border="1" %}
 
-`Server=localhost;Database=master;Trusted_Connection=True;`
+```csharp
+Server=localhost;Database=master;Trusted_Connection=True;
+```
 
-ولإدارة قاعدة البيانات هذه والتعامل معها سنستخدم `Azure Data Studio` والتي يمكن تحميلها من الرابط التالي:
+ولإدارة قاعدة البيانات هذه والتعامل معها سنستخدم Azure Data Studio والتي يمكن تحميلها من الرابط التالي:
 
 [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio)
 
-بعد تنصيب هذه البرامج نقوم بإنشاء مجلد جديد بإسم `Entities` وبداخله ملف Employee.cs:
+بعد تثبيت هذه البرامج نقوم بإنشاء مجلد جديد بإسم Entities وبداخله ملف Employee.cs:
 
 ```csharp
 using System;
@@ -39,22 +41,22 @@ namespace aspnetcorewebapiproject.Entities
         [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
-        
+
         [Required]
         [StringLength(100)]
         public string LastName { get; set; }
-        
+
         public bool IsManager { get; set; }
-        
+
         [DataType(DataType.Date)]
         public DateTime EnrollmentDate { get; set; }
-        
+
         public DateTime CreatedDate { get; set; }
     }
 }
 ```
 
-لإضافة Entity Framework ننفذ الأوامر التالية:
+ولإضافة Entity Framework ننفذ الأوامر التالية:
 
 ```bash
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
@@ -62,15 +64,35 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
-نقوم الآن بإنشاء database context للتعامل مع قاعدة البيانات. ننشئ أولاً مجلد جديد بإسم `DbContexts` وبداخله الملف `MainDbContext` ومحتواه:
-
-ثم نضيف التالي في آخر الدالة `ConfigureServices` في ملف `Startup.cs`:
+نقوم الآن بإنشاء database context للتعامل مع قاعدة البيانات. ننشئ أولاً مجلد جديد بإسم DbContexts وبداخله الملف MainDbContext.cs ومحتواه:
 
 ```csharp
-services.AddDbContext<DbContexts.MainDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MainDbContext")));
+using System;
+using Microsoft.EntityFrameworkCore;
+
+namespace aspnetcorewebapiproject.DbContexts
+{
+    public class MainDbContext : DbContext
+    {
+        public DbSet<Entities.Employee> Employees { get; set; }
+
+        public MainDbContext(DbContextOptions<MainDbContext> options)
+            : base(options)
+        {
+        }
+    }
+}
 ```
 
-وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانت ConnectionStrings بإسم MainDbContext وهنا نستفيد من معلومات الإتصال بقاعدة البيانات التي نسخناها سابقاً ولكننا سنستبدل قاعدة البيانات `master` بـ `MainDb`:
+ثم نضيف التالي في آخر الدالة ConfigureServices في ملف Startup.cs:
+
+```csharp
+services.AddDbContext<DbContexts.MainDbContext>(
+    options => options.UseSqlServer(Configuration.GetConnectionString("MainDbContext"))
+);
+```
+
+وفي ملف appsettings.json نضيف إعدادات الإتصال بقاعدة البيانت ConnectionStrings بإسم MainDbContext وهنا نستفيد من معلومات الإتصال بقاعدة البيانات التي نسخناها سابقاً ولكننا سنستبدل قاعدة البيانات master بـ MainDb:
 
 ```json
 {
@@ -84,29 +106,29 @@ services.AddDbContext<DbContexts.MainDbContext>(options => options.UseSqlServer(
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "MainDbContext": "Server=localhost;Database=MainDb;Trusted_Connection=True;"
-  }    
+  }
 }
 ```
 
-نضيف الآن أدة dotnet-ef
+نضيف الآن أدة dotnet-ef:
 
 ```csharp
 dotnet tool install --global dotnet-ef
 ```
 
-نضيف أوامر التعديل على قاعدة البيانات:
+ثم نضيف أوامر التعديل على قاعدة البيانات:
 
 ```csharp
 dotnet ef migrations add InitialCreate
 ```
 
-نلاحظ إنه تم إنشاء مجلد جديد بإسم `Migrations` وبه الأوامر التي سيتم تنفيذها للتعديل على قاعدة البيانات. نقوم الآن بتنفيذ الأومر:
+نلاحظ إنه تم إنشاء مجلد جديد بإسم Migrations وبه الأوامر التي سيتم تنفيذها للتعديل على قاعدة البيانات. نقوم الآن بتنفيذ الأمر:
 
 ```csharp
 dotnet ef database update
 ```
 
-نستخدم الآن `Azure Data Studio` لرؤية التعديلات التي تم تنفيذها. من القائمة في اليسار نختار `Connection` ثم `New Connection`:
+نستخدم الآن Azure Data Studio لرؤية التعديلات التي تم تنفيذها. من القائمة في اليسار نختار Connection ثم New Connection:
 
 {% include image.html url="assets/files/article_02/ads-new-connection.png" border="1" %}
 
@@ -117,25 +139,32 @@ dotnet ef database update
 والمعلومات هذه تم أخذها من التالي:
 
 ```json
-  "ConnectionStrings": {
+"ConnectionStrings": {
     "MainDbContext": "Server=localhost;Database=MainDb;Trusted_Connection=True;"
-  }   
+}  
 ```
 
-نضغط بعد ذلك على زر `Connect` ثم يظهر لنا أنه تم إنشاء جدولين جديدين في قاعدة البيانات `Employees`:
+نضغط بعد ذلك على زر Connect ثم يظهر لنا أنه تم إنشاء جدولين جديدين في قاعدة البيانات Employees:
 
 {% include image.html url="assets/files/article_02/ads-maindb-created.png" border="1" %}
 
-* `_EFMigrationsHistory` وتحتفظ بكل التغييرات التي تمت على قاعدة البيانات هذه من Entity Framework
-* `Employees` الجدول الذي يقابل الـ `class Employee` الذي أنشأناه في الكود
+* **EFMigrationsHistory__** وتحتفظ بكل التغييرات التي تمت على قاعدة البيانات هذه من Entity Framework
+* **Employees** الجدول الذي يقابل الـ  Employee entity الذي أنشأناه في الكود
 
-بإمكاننا أن نرى أن جدول `Employees` خالي ولم يتم تعبئته بالبيانات:
+بإمكاننا أن نرى أن جدول Employees خالي ولم يتم تعبئته بالبيانات:
 
 {% include image.html url="assets/files/article_02/ads-employees-select-top-1000.png" border="1" %}
 
-### إضافة كنترولر جديد EmployeesController
+أضاف التغييرات الى git:
 
-سنستفيد من أداة الـ dotnet في توليد generate كنترولر جديد بإسم EmployeesController. وللقيام بذلك علينا أولاً إضافة الخاصية لهذه الأداة بتنفيذ الأوامر التالي:
+```bash
+git add .
+git commit -m "adds main database context"
+```
+
+## إضافة كنترولر جديد EmployeesController
+
+سنستفيد من أداة الـ dotnet في توليد generate كنترولر جديد بإسم EmployeesController. وللقيام بذلك علينا أولاً إضافة الخاصية لهذه الأداة بتنفيذ الأوامر التالية:
 
 ```bash
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -152,12 +181,12 @@ dotnet aspnet-codegenerator controller -name EmployeesController -async -api -m 
 
 | الأمر | القيمة | الوصف|
 |---:|---:|---:|
-| _name_ | EmployeesController |  إسم الكنترولر المراد إنشاؤه |
-| _async_ |   | جعل الأوامر غير متزامنه asynchronous |
-| _api_ |   | لعدم إنشاء Views |
-| _m_ | Employee | إسم الـ model الذي سيستخدم |
-| _dc_ | MainDbContext | الـ database context المستخدم |
-| _outDir_ | Controllers | المجلد الذي سيتم وضع الكنترولر فيه |
+| **name** | EmployeesController |  إسم الكنترولر المراد إنشاؤه |
+| **async** |   | لجعل الأوامر غير متزامنه asynchronous |
+| **api** |   | لعدم إنشاء Views |
+| **m** | Employee | إسم الـ model الذي سيستخدم |
+| **dc** | MainDbContext | الـ database context المستخدم |
+| **outDir** | Controllers | المجلد الذي سيتم وضع الكنترولر فيه |
 
 بإمكاننا أن نرى بأنه تم إنشاء ملف جديد بإسم EmployeesController.cs داخل المجلد Controllers:
 
@@ -280,11 +309,11 @@ namespace aspnetcorewebapiproject.Controllers
 
 | Verb | Url| الوصف| Request Body | Response Body |
 |---:|---:|---:|---:|---:|
-| GET | api/employees | لإسترجاع قائمة بجميع الموظفين | - | قائمة بالموظفين |
-| GET | api/employees/{id} | لإسترجاع معلومات موظف معين | - | معلومات موظف |
-| PUT | api/employees/{id} | لتعديل معلومات موظف | معلومات موظف | - |
-| POST | api/employees | لإضافة معلومات موظف جديد | معلومات موظف | معلومات موظف |
-| DELETE | api/employees/{id} | لحذف معلومات موظف | - | معلومات موظف |
+| **GET** | *api/employees* | لإسترجاع قائمة بجميع الموظفين | - | قائمة بالموظفين |
+| **GET** | *api/employees/{id}* | لإسترجاع معلومات موظف معين | - | معلومات موظف |
+| **PUT** | *api/employees/{id}* | لتعديل معلومات موظف | معلومات موظف | - |
+| **POST** | *api/employees* | لإضافة معلومات موظف جديد | معلومات موظف | معلومات موظف |
+| **DELETE** | *api/employees/{id}* | لحذف معلومات موظف | - | معلومات موظف |
 
 هتالك تعديل بسيط يستحسن القيام به على الملف EmployeesController.cs في السطر 86 للإعتماد على الـ concrete types وليس على نص hard coded:
 
@@ -307,9 +336,11 @@ dotnet run
 
 ## تجربة الكنترولر الجديد EmployeesController
 
-سنستخد postman للقيام بذلك، ولكن أول ما نقوم به هو الذهاب الى File ثم Settings والتأكد من قيمة الإعداد التالي:
+سنستخد Postman للقيام بذلك، ولكن أول ما نقوم به هو الذهاب الى File ثم Settings والتأكد من قيمة الإعداد التالي:
 
-`SSL certificate verification = OFF`
+```bash
+SSL certificate verification = OFF
+```
 
 {% include image.html url="assets/files/article_02/postman-disable-ssl-certificate-verification.png" border="1" %}
 
@@ -343,10 +374,9 @@ dotnet run
 
 بإمكانك الإستعلام عن معلومات الموظف لتتأكد بأنه تم تعديل المعلومات:
 
-`https://localhost:5001/api/employees/2`
-
-
-
+```html
+https://localhost:5001/api/employees/2
+```
 
 ### حذف معلومات موظف معين
 
@@ -359,3 +389,12 @@ dotnet run
 {% include image.html url="assets/files/article_02/postman-get-specific-employee-after-deletion.png" border="1" %}
 
 نرى أن الـ Http Status Code المسترجع هو  404 Not Found أي أنه لم يتم إيجاد الموظف بهذا الرقم وهذا صحيح.
+
+والـن لا تنسى إضافة التغييرات الى git:
+
+```bash
+git add .
+git commit -m "adds EmployeeController"
+```
+
+وهكذا نكون قد أضفنا controller جديد مما يمكنا من بنائ باقي المشروع عليه بمشيئة الله.
