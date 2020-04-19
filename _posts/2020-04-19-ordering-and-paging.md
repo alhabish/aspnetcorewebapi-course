@@ -13,7 +13,7 @@ comments: true
 
 جميع تعديلاتنا في هذا الدرس سوف تكون على ()GetEmployees في EmployeesController وذلك لأنها هي الدالة التي ترجع لنا أكثر من قيمة وعليه يمكن ترتيبها وتتجزئتها. أول تعديل نقوم به هو جعلها تستقبل arguments تحدد أي خانه في الـ entity نرغب الترتيب بناءاً عليها (orderBy) وهل الترتيب هذا تصاعدي م تنازلي (orderType).
 
-```charp
+```csharp
 [HttpGet]
 public async Task<ActionResult<IEnumerable<EmployeeDetailsDto>>> GetEmployees(string orderBy, string orderType)
 {
@@ -242,3 +242,9 @@ public async Task<ActionResult<PaginatedList<EmployeeDetailsDto>>> GetEmployees(
 	return Ok( pagedDtos );
 }
 ```
+
+بالإمكان تجربة عناوين كالتالي مع تجربة تغيير القيّم لرؤية كيف أن الترتيب ومحتوى الصفحات سيتغير:
+
+```html
+https://localhost:5001/api/employees?orderBy=FirstName&orderType=Desc&pageIndex=1
+``
