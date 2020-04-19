@@ -247,4 +247,4 @@ public async Task<ActionResult<PaginatedList<EmployeeDetailsDto>>> GetEmployees(
 
 ```html
 https://localhost:5001/api/employees?orderBy=FirstName&orderType=Desc&pageIndex=1
-``
+```
