@@ -247,4 +247,81 @@ public async Task<ActionResult<PaginatedList<EmployeeDetailsDto>>> GetEmployees(
 
 ```html
 https://localhost:5001/api/employees?orderBy=FirstName&orderType=Desc&pageIndex=1
+``
+
+## حفظ القيّم الإفتراضية في ملف الإعدادات
+
+نلاحظ أننا أستخدمنا في ()GetEmployees بعض القيّم الإفتراضية في حالة لم يتم تمرير orderBy و orderType وغيرها في الـ query string. لكن ماذا لو أردنا تغييرها فيما بعد؟ سنضطر الى بناء المشروع build ورفعه deploy من جديد. وماذا لو أردنا إستخدام هذه القيّم في controllers أخرى؟ سنضطر الى نصخها ولصقها هناك ولو تغيرت القيمة فإنه يجب علينا تغييرها في جميع هذه الـ controllers.
+
+حل ذلك هو وضع هذه القيّم في appsettings.json وإستخدامها في أي مكان أحتجنا اليها في المشروع وذلك بإتباع الخطوات التالية:
+
+في ملف appsettings.json نضيف مجموعة جديدة من الإعدادات بإسم ResponseDefaults تحدد القيّم الإفتراضية المعادة في الـ response:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "MainDbContext": "Server=localhost;Database=MainDb;Trusted_Connection=True;"
+  },
+  "ResponseDefaults": {
+    "OrderType": "Asc",
+    "PageIndex": 1,
+    "PageSize": 3
+  }  
+}
+```
+
+من الملاحظ أننا لم نضيف قيمة لـ OrderBy وذلك لأنها خاصة بكل controller.
+
+وفي EmployeesController نضيف أولاً الـ namespace التالي:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+```
+
+ونضيف الـ field والمتغير التالي:
+
+```csharp
+public class EmployeesController : ControllerBase
+{
+	private IConfiguration _config;
+	...
+
+	public EmployeesController(IConfiguration config, IRepository<Employee> repo, IMapper mapper)
+	{
+		_config = config;
+		...
+	}
+	
+	...
+}
+```
+
+وأخيراً نعدل على ()GetEmployees كالتالي:
+
+```csharp
+        // GET: api/Employees
+        [HttpGet]
+        public async Task<ActionResult<PaginatedList<EmployeeDetailsDto>>> GetEmployees(string orderBy, string orderType, int? pageIndex, int? pageSize)
+        {
+            var pagedEntities = await _repo.GetAllAsync(
+                    orderBy     ?? "FirstName", 
+                    orderType   ?? _config.GetValue<string>("ResponseDefaults:OrderType"),
+                    pageIndex   ?? _config.GetValue<int>("ResponseDefaults:PageIndex"), 
+                    pageSize    ?? _config.GetValue<int>("ResponseDefaults:PageSize")
+                );
+
+            var employeeDetailsDtos = _mapper.Map<List<EmployeeDetailsDto>>(pagedEntities.Items);
+
+            var pagedDtos = new PaginatedList<EmployeeDetailsDto>(employeeDetailsDtos, pagedEntities.ItemsCount, pagedEntities.PageIndex, pagedEntities.PageSize);
+
+            return Ok( pagedDtos );
+        }
 ```
