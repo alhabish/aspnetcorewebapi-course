@@ -7,7 +7,7 @@ index: 5
 comments: true
 ---
 
-في هذا الدرس سنقوم بتوحيد النتائج المسترجعة response من الخدمة. نلاححظ أن بعظ العمليات تعيد لنا قائمة (GetEmployees) وبعضها تعيد لنا قيمة واحدة (GetEmployee و PostEmployee و DeleteEmployee) بينما العملية الأخير لا تعيد أي قيمة على الإطلاق (PutEmployee).
+في هذا الدرس سنقوم بتوحيد النتائج المسترجعة response من الخدمة. نلاحظ أن بعض العمليات تعيد لنا قائمة (GetEmployees) وبعضها تعيد لنا قيمة واحدة (GetEmployee و PostEmployee و DeleteEmployee) بينما العملية الأخيرة لا تعيد أي قيمة على الإطلاق (PutEmployee).
 
 ## إنشاء الـ Class الخاص بالـ Response
 
@@ -166,7 +166,7 @@ Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>>
 
 ### PutEmployee
 
-سابقاً كتنت هذه العملية لا تعيد لنا قيمة حيث أن Http Status Code كان 204 أي No Content. ولكن لو عدنا الى الـ method definitions في w3.org لرأينا أنه بإمكان الـ Put أن تعيد إما:
+سابقاً كانت هذه العملية لا تعيد لنا قيمة حيث أن Http Status Code كان 204 أي No Content. ولكن لو عدنا الى الـ method definitions في w3.org لرأينا أنه بإمكان الـ Put أن تعيد إما:
 
 * 204 No Content أو
 * Ok 200
