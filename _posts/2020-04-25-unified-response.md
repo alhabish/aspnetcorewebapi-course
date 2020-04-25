@@ -40,11 +40,12 @@ namespace aspnetcorewebapiproject.Models.Employees
 
 ونبدأ الآن إستخدامها في العمليات الخاصة بـ EmployeesController.
 
-## GetEmployees
+### GetEmployees
 
 نعدل على العملية لتصبح بالشكل التالي:
 
 ```csharp
+[HttpGet]
 public async Task<ActionResult<EmployeesResponse<PaginatedList<EmployeeDetailsDto>>>> GetEmployees(string orderBy, string orderType, int? pageIndex, int? pageSize)
 {
 	var pagedEntities = await _repo.GetAllAsync(
@@ -295,4 +296,73 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> DeleteEmp
 
 ```csharp
 Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>>
+```
+
+## Binding to Query String
+
+هذه خطوة لتنظيم الكود نوعاً ما، فبدلاً من أن يكون إسناد القيم من الـ query string كل متغير على حده كما هو الحال الآن:
+
+```csharp
+public async Task<ActionResult<EmployeesResponse<PaginatedList<EmployeeDetailsDto>>>> GetEmployees(string orderBy, string orderType, int? pageIndex, int? pageSize)
+{
+  ...
+}
+```
+
+سيصبح الكود بالطريقة التالية:
+
+```csharp
+public async Task<ActionResult<EmployeesResponse<PaginatedList<EmployeeDetailsDto>>>> GetEmployees([FromQuery] EmployeeGetDto employeeGetDto)
+{
+  ...
+}
+```
+
+ولعمل ذلك نقوم بالتالي:
+
+داخل المجلد Models\Employees نقوم بإنشاء ملف جديد بإسم EmployeeGetDto.cs ويحتوي على الكود التالي:
+
+```csharp
+
+using System;
+
+namespace aspnetcorewebapiproject.Models.Employees
+{
+    public class EmployeeGetDto
+    {
+        public string orderBy { get; set; }        
+        public string orderType { get; set; }
+        public int? pageIndex { get; set; }
+        public int? pageSize { get; set; }
+    }
+}
+```
+
+ثم نعدل على العملية GetEmployees في EmployeesController لتصبح:
+
+```csharp
+[HttpGet]
+public async Task<ActionResult<EmployeesResponse<PaginatedList<EmployeeDetailsDto>>>> GetEmployees([FromQuery] EmployeeGetDto employeeGetDto)
+{
+	var pagedEntities = await _repo.GetAllAsync(
+			employeeGetDto.orderBy     ?? "FirstName", 
+			employeeGetDto.orderType   ?? _config.GetValue<string>("ResponseDefaults:OrderType"),
+			employeeGetDto.pageIndex   ?? _config.GetValue<int>("ResponseDefaults:PageIndex"), 
+			employeeGetDto.pageSize    ?? _config.GetValue<int>("ResponseDefaults:PageSize")
+		);
+
+	var employeeDetailsDtos = _mapper.Map<List<EmployeeDetailsDto>>(pagedEntities.Items);
+
+	var pagedDtos = new PaginatedList<EmployeeDetailsDto>(employeeDetailsDtos, pagedEntities.ItemsCount, pagedEntities.PageIndex, pagedEntities.PageSize);
+
+	var response = new EmployeesResponse<PaginatedList<EmployeeDetailsDto>>
+	{
+		IsSuccessful = true,
+		Status = 200,
+		Message = string.Empty,
+		Data = pagedDtos
+	};
+
+	return Ok( response );
+}
 ```
