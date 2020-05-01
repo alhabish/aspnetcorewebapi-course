@@ -337,4 +337,4 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> PutEmploy
 }
 ```
 
-
+وبذلك لن نستخدم عبارة `try {} catch {}` في العمليات وإنما سنجعل الـ middleware الجديد يتحمل مسؤولية التعامل مع الأخطاء.
