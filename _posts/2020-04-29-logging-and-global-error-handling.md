@@ -286,7 +286,7 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 
 وعند تجربتها في Postman نلاحظ الرد التالي:
 
-{% include image.html url="assets/files/article_06/general-error-handling.png" border="1" %
+{% include image.html url="assets/files/article_06/general-error-handling.png" border="1" %}
 
 وبما أننا أصبحنا نتعامل مع الأخطاء في مكان موحد، فبإمكاننا الآن العودة الى العملية ()PutEmployee والتعديل عليها لكي لا ترجع خطأ من نوع Status500InternalServerError بل نجعلها مسؤولية الـ middleware الجديد الذي أنشأناه ()ConfigureGlobalExceptionHandler:
 
