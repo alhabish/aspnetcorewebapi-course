@@ -133,7 +133,7 @@ git commit -m "adds in-memory cache support to GetEmployees()"
 نعود الآن الى الـ master branch:
 
 ```bash
-git branch master
+git checkout master
 ```
 
 ثم ننشئ branch جديد ونتحول عليه:
@@ -262,6 +262,7 @@ public void ConfigureServices(IServiceCollection services)
 		options.Configuration = "localhost";
 	});
 }
+```
 
 ### 4. التعديل على EmployeesController.cs
 
@@ -357,4 +358,20 @@ docker rm redis-store
 ```bash
 git add .
 git commit -m "adds distributed cache support to GetEmployees()"
+```
+
+### 6. إعتماد خاصية الـ In-memory caching
+
+سنعتمد الآن ما قمنا به في الـ branch الذي أنشأناه سابقاً inmemory-cache وسنضيفة على الـ master.
+
+نعود الآن الى الـ master branch:
+
+```bash
+git checkout master
+```
+
+ثم ندمج التعديلات التي تمت في الـ inmemory-cache branch:
+
+```bash
+git merge inmemory-cache
 ```
