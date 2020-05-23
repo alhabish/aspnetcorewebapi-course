@@ -7,11 +7,15 @@ index: 8
 comments: true
 ---
 
+كنا فيما سبق نستخدم Postman لتجربة الخدمة التي بنيناها، ولكن عندما نريد الإستفادة من هذه الخدمة بالفعل سيكون ذلك إما عن طريق نداء الخدمة من الـ frontend وسنأخذ مثال على الـ javascript لذلك أو يكون في الـ backend وسنستخدم NET. للقسام بذلك:
+
 # إستدعاء الخدمة من Javascript
+
+سنبدأ من الـ frontend وسنوضح كيف يمكن لـ javascript أن تستدعي جميع العمليات التي قمنا بإنشائها في EmployeesController:
 
 ## إستدعاء GetEmployee
 
-إحفظ الملف التالي بإسم get-employee.html ثم قم بعرضه في أحد المتصفحات:
+إحفظ الكود التالي في ملف بإسم get-employee.html ثم قم بعرضه في أحد المتصفحات:
 
 ```html
 <html>
@@ -29,19 +33,19 @@ comments: true
 </html>
 ```
 
-ستلاحظ أن الصفحة فاضية، ولكن لو عرضت الـ developer tools بإستخدام F12 سترى التالي:
+ستلاحظ أن الصفحة لا تحتوي على شيئ، ولكن لو عرضت الـ developer tools بإستخدام F12 سترى التالي:
 
 {% include image.html url="assets/files/article_08/err-cert-authority-invalid.png" border="1" %}
 
 ولو حاولنا فتح المتصفح مباشرة على الرابط:
 
-https://localhost:5001/api/employees/1
+<https://localhost:5001/api/employees/1>
 
-ستظهر لنا الشاشة التالية. والمشكلة هنا أن المتصفح لم يعتمد ويتعرف على الشهادة certificate التي أنشأتها بيئة عمل dot net core للتطوير development. ولإعتمادها مؤقتاً نضغط على Advanced:
+ستظهر لنا الشاشة التالية:
 
 {% include image.html url="assets/files/article_08/cert-issue-browser-advanced.png" border="1" %}
 
-ثم Proceed to localhost:
+ والمشكلة هنا أن المتصفح لم يتعرف على الشهادة certificate التي أنشأتها بيئة عمل dot net core للتطوير development. ولإعتمادها مؤقتاً نضغط على Advanced ثم Proceed to localhost:
 
 {% include image.html url="assets/files/article_08/proceed-to-localhost.png" border="1" %}
 
@@ -53,15 +57,15 @@ https://localhost:5001/api/employees/1
 
 {% include image.html url="assets/files/article_08/err-connection-refused.png" border="1" %}
 
-وسبب ذلك يعود الى مبدأ Cross-Origin Resource Sharing - CORS حيث أن المتصفح لن يسمح لنا بإستدعاء خدمة عن طريق الـ javascript ليستا في نفس الدومين طلما لم تصرح الخدمة بالسماح بذلك.
+وسبب ذلك يعود الى مبدأ Cross-Origin Resource Sharing - CORS حيث أن المتصفح لن يسمح لنا بإستدعاء خدمة عن طريق الـ javascript ليست في نفس دومين المستدعي طلما لم تصرح الخدمة بالسماح بذلك.
 
 ## تمكين CORS
 
-وللسماح لأي مستفيد من الوصول الى الخدمة نقوم بالتالي:
+للسماح لأي مستفيد من الوصول الى الخدمة نقوم بالتالي:
 
 ### 1. التعديل على ConfigureServices في Startup.cs
 
-Open Startup.cs and in ConfigureServices add:
+نقوم بالتعديل التالي:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -75,7 +79,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 ### 2. التعديل على Configure في Startup.cs
 
-Also in Startup.cs and in Configure add:
+نضيف ما يلي:
 
 app.UseCors();
 
@@ -98,7 +102,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<
 
 [Middleware order](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-3.1#middleware-order)
 
-### 2. التعديل على EmployeesController
+### 3. التعديل على EmployeesController
 
 في EmployeesController نضيف التعديلات التالية:
 
@@ -115,6 +119,10 @@ namespace aspnetcorewebapiproject.Controllers
     {
 		...
 ```
+
+والآن عند عرض الملف في المتصفح مرة أخرى سوف يكون بإمكاننا رؤية نتيجة الإستدعاء بشكل صحيح:
+
+{% include image.html url="assets/files/article_08/get-employee-browser-response-correct.png" border="1" %}
 
 ## إستدعاء GetEmployees
 
@@ -135,7 +143,6 @@ namespace aspnetcorewebapiproject.Controllers
 ```
 
 {% include image.html url="assets/files/article_08/get-employees-browser-response.png" border="1" %}
-
 
 ## إستدعاء PostEmployee
 
@@ -202,7 +209,7 @@ namespace aspnetcorewebapiproject.Controllers
  </body>
 </html>
 ```
-وبإستطاعتنا أن نرى أنه تم إضافة المستخدم الجديد:
+وبإستطاعتنا أن نرى أنه تم فعلاً تعديل البيانات:
 
 {% include image.html url="assets/files/article_08/put-employee-browser-response.png" border="1" %}
 
@@ -227,13 +234,13 @@ namespace aspnetcorewebapiproject.Controllers
  </body>
 </html>
 ```
-وبإستطاعتنا أن نرى أنه تم إضافة المستخدم الجديد:
+وبإستطاعتنا أن نرى أن العملية تمت بشكل صحيح:
 
 {% include image.html url="assets/files/article_08/delete-employee-browser-response.png" border="1" %}
 
 # إستدعاء الخدمة من NET.
 
-أسهل طريقة للتعامل مع خدمة من نوع REST عن طريق الـ NET. هي بإستخدام مكتبة RestSharp. 
+في الحالات التي نريد فيها إستدعاء الخدمة من الـ backend فإننا نستخدم هذه الإسلوب وأسهل طريقة للتعامل مع خدمة من نوع REST عن طريق الـ NET. هي بإستخدام مكتبة RestSharp. وللقيام بذلك نتبع الخطوات التالية:
 
 ### 1. أنشئ مشروع جديد من نوع Console
 
@@ -257,6 +264,7 @@ code .
 * PaginatedList
 * EmployeeDetailsDto
 
+وبالنسبة لـ PaginatedList فنحن لسنا بحاجة لتعريف الـ methods وإنما الـ properties فقط.
 
 ### 3. إضافة مكتبة RestSharp
 
@@ -265,6 +273,8 @@ code .
 ```bash
 dotnet add package RestSharp
 ```
+
+وسنقوم الآن بإستدعاء جميع العمليات بإستخدام هذه المكتبة.
 
 ## إستدعاء GetEmployee
 
