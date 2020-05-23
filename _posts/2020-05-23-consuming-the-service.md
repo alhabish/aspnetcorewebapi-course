@@ -7,7 +7,7 @@ index: 8
 comments: true
 ---
 
-كنا فيما سبق نستخدم Postman لتجربة الخدمة التي بنيناها، ولكن عندما نريد الإستفادة من هذه الخدمة بالفعل سيكون ذلك إما عن طريق نداء الخدمة من الـ frontend وسنأخذ مثال على الـ javascript لذلك أو يكون في الـ backend وسنستخدم NET. للقسام بذلك:
+كنا فيما سبق نستخدم Postman لتجربة الخدمة التي بنيناها، ولكن عندما نريد الإستفادة من هذه الخدمة بالفعل سيكون ذلك إما عن طريق نداء الخدمة من الـ frontend وسنأخذ مثال على الـ javascript للقيام بذلك أو يكون في الـ backend وسنستخدم NET. في هذه الحالة.
 
 # إستدعاء الخدمة من Javascript
 
@@ -80,8 +80,6 @@ public void ConfigureServices(IServiceCollection services)
 ### 2. التعديل على Configure في Startup.cs
 
 نضيف ما يلي:
-
-app.UseCors();
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
@@ -268,7 +266,7 @@ code .
 
 ### 3. إضافة مكتبة RestSharp
 
-لإضافة هذه المكتبة البرمجية نستخد الأمر التالي:
+لإضافة هذه المكتبة البرمجية نستخدم الأمر التالي:
 
 ```bash
 dotnet add package RestSharp
