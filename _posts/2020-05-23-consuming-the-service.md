@@ -132,6 +132,7 @@ namespace aspnetcorewebapiproject.Controllers
   </script>
  </body>
 </html>
+```
 
 {% include image.html url="assets/files/article_08/get-employees-browser-response.png" border="1" %}
 
