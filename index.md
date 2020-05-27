@@ -5,6 +5,8 @@ title: "الصفحة الرئيسية"
 
 # قائمة الدروس
 
+<div style="float: left;">
+
 <ul>
   {% assign posts = site.posts | sort: 'date' %}
   {% for post in posts %}
@@ -14,6 +16,7 @@ title: "الصفحة الرئيسية"
   {% endfor %}
 </ul>
 
+</div>
 <!--[back](./)-->
 
 ---
