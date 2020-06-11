@@ -306,6 +306,7 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 ```bash
 git add .
 git commit -m "adds basic authentication support"
+```
 
 سوف نبقي هذه الخاصية في هذا الـ branch وسوف نعود الى master من دونها لنتمكن من تكملة باقي الدروس:
 
@@ -314,6 +315,8 @@ git checkout master
 ```
 
 ### ~~~ مصادر ~~~
+
 [ASP.NET Core 3.1 - Basic Authentication Tutorial with Example API
 ](https://jasonwatmore.com/post/2019/10/21/aspnet-core-3-basic-authentication-tutorial-with-example-api)
+
 [ASP.NET Core Web API + Entity Framework Core : Basic Authentication Explained - EP07](https://www.youtube.com/watch?v=6X6iONXhz2w)
