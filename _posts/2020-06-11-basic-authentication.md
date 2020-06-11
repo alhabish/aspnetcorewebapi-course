@@ -192,19 +192,19 @@ namespace aspnetcorewebapiproject.Handlers
 
 وفيما يلي شرح لأهم النقاط التي وردت في الكود السابق:
 
-1) نمرر Users.IAuthenticationService في الـ constructor والتي سيتم إستبدالها بالتطبيق AuthenticationService
+1. نمرر Users.IAuthenticationService في الـ constructor والتي سيتم إستبدالها بالتطبيق AuthenticationService
 
-2) في حالة لم يتم تمرير Authorization في الـ HTTP Header فإن عملية التحقق ستفشل
+2. في حالة لم يتم تمرير Authorization في الـ HTTP Header فإن عملية التحقق ستفشل
 
-3) نستخلص قيمة الـ Authorization header
+3. نستخلص قيمة الـ Authorization header
 
-4) نتأكد أن نوع عملية التحقق هي Basic
+4. نتأكد أن نوع عملية التحقق هي Basic
 
-5) إذا حدث خطأ في إستخلاص الإسم وكلمة المرور فإن العملية ستفشل
+5. إذا حدث خطأ في إستخلاص الإسم وكلمة المرور فإن العملية ستفشل
 
-6) إذا لم نجد المستخدم الذي يحمل هذا الإسم وكلمة المرور فإن التحقق سيفشل
+6. إذا لم نجد المستخدم الذي يحمل هذا الإسم وكلمة المرور فإن التحقق سيفشل
 
-7) في حالة أننا وجدنا المستخدم سنقوم بحفظ معلوماته في ما يسمى بالـ claims وهي عبارة عن key-value pair تمثل بيانات المستخدم
+7. في حالة أننا وجدنا المستخدم سنقوم بحفظ معلوماته في ما يسمى بالـ claims وهي عبارة عن key-value pair تمثل بيانات المستخدم
 
 
 ## التعديل على Startup.cs
@@ -317,15 +317,3 @@ git checkout master
 [ASP.NET Core 3.1 - Basic Authentication Tutorial with Example API
 ](https://jasonwatmore.com/post/2019/10/21/aspnet-core-3-basic-authentication-tutorial-with-example-api)
 [ASP.NET Core Web API + Entity Framework Core : Basic Authentication Explained - EP07](https://www.youtube.com/watch?v=6X6iONXhz2w)
-
-
-
-
-
------------------
-the following tells the client never to use http to talk to the server:
-
-doesnt work for localhost but works with regular domain names
-
-app.UseHsts();
-------------------
