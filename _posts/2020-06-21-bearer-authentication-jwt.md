@@ -128,7 +128,7 @@ dotnet ef database update
   ... ,
   "JwtSettings": {
     "SecretKey": "SecretSecurityKey",
-    "TokenLifeTime": "00:15:00"
+    "TokenLifeTime": "00:05:00"
   }    
 }
 ```
@@ -211,10 +211,10 @@ namespace aspnetcorewebapiproject.Controllers.v1
 
                     // not before, this token is not valid before a certain date and time
                     // in our case we want it to be valid right away
-                    new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString()),
 
                     // when will it expire
-                    new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now).Add(tokenLifeTime).ToUnixTimeSeconds().ToString())
+                    new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.UtcNow).Add(tokenLifeTime).ToUnixTimeSeconds().ToString())
                 };
 
                 var creds = new SigningCredentials(
@@ -367,7 +367,9 @@ public class EmployeesController : ControllerBase
 
 نطلب الآن العنوان التالي ونقوم بتمرير إسم المستخدم وكلمة المرور لأحد المستخدمين المسجلين في AuthenticationService في الـ request body:
 
+```html
 https://localhost:5001/api/v1.0/auth/login
+```
 
 {% include image.html url="assets/files/article_12/postman-token.png" border="1" %}
 
@@ -403,19 +405,19 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 
 ### لعدم إشتراط التحقق
 
-هناك حالات لا تريد فيها المستخدم أن يرسل إسم مستخدم وكلمة المرور، كأن يسجل في الخدمة لأول مرة، ففي هذه الحالة يمكنك إضافة الـ attribute التالي: [AllowAnonymous] على العملية التي لا تتطلب التحقق من المستخدم.
+هناك حالات لا تريد فيها من المستخدم أن يرسل بيانات التحقق كإسم المستخدم وكلمة المرور أو التوكن في حالتنا هذه، كأن يسجل في الخدمة لأول مرة، ففي هذه الحالة يمكنك إضافة الـ attribute التالي: [AllowAnonymous] على العملية التي لا تتطلب التحقق من المستخدم.
 
-## تحديث التوكن
+## تحديث الـ JWT Token
 
 مشكلة التوكن أن صلاحيته تنتهي expires بعد مرور فترة من الزمن تقوم أنت بتحديدها. وما يمكننا فعله في هذه الحالية هو توفير خاصية لتحديث التوكن بدلاً من تسجيل الدخول بإستخدام الإسم وكلمة المرور من جديد.
 
-الفرق بين توكن jwt وتوكن التحديث هو أن الأول فترة صلاحية أقل بكثير من الثاني وذلك 
+الفرق بين توكن jwt وتوكن التحديث هو أن الأول فترة صلاحية أقل بكثير من الثاني حيث من الممكن أن تستمر صلاحية الثاني الى عدة أشهر. بالإضافة الى أن توكن التحديث لا يحتوي على معلومات المستخدم وإنما يعتبر كمعرف للأول لا أكثر.
 
-وسوف نستخدم توكن jwt المنتهي صلاحيته وتوكن التحديث refresh token لتوليد توكن jwt جديد.
+سوف نستخدم توكن jwt المنتهي صلاحيته وتوكن التحديث refresh token لتوليد توكن jwt جديد.
 
 ### تحديد مدة صلاحية الـ refresh token
 
-يكون ذلك في ملف appsettings.json بإضافة RefreshTokenLifeTimeInMonths وهي تحدد صلاحية الـ refresh token بالأشهر:
+يكون ذلك في ملف appsettings.json حيث سنقوم بإضافة RefreshTokenLifeTimeInMonths وهي تحدد صلاحية الـ refresh token بالأشهر:
 
 ```csharp
   "JwtSettings": {
@@ -425,11 +427,9 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
   }
 ```
 
-حددنا هنا صلاحية 
-
 ### إنشاء entity جديدة
 
-ننشء entity بإسم UserRefreshToken في مجلد الـ Entities مسؤولة عن حفظ الـ refresh token الخاصة بالمستخدم والـ jwt id التي ترتبط بها:
+ننشئ entity بإسم UserRefreshToken في مجلد الـ Entities مسؤولة عن حفظ الـ refresh token الخاصة بالمستخدم والـ jwt id التي ترتبط بها:
 
 ```csharp
 using System;
@@ -466,7 +466,7 @@ namespace aspnetcorewebapiproject.Entities
 
 ### إضافته الى الـ db context
 
-نقوم بإضافة الـ entity الجديد UserToken على MainDbContext كما يلي:
+نقوم بإضافة الـ entity الجديد UserRefreshToken على MainDbContext كما يلي:
 
 ```csharp
 public class MainDbContext : DbContext
@@ -509,7 +509,7 @@ namespace aspnetcorewebapiproject.Models.Auth.v1
 
 ### التعديل على AuthController
 
-هنالك عدة تعديلات تمت على AuthController وذلك لأننا أضفنا دالة خاصة بتحديث التوكن فأصبح لدينا كود مشترك بين دالة التجديث ودالة الإنشاء مما توجب علينا استخلاصها في دوال مشتركة:
+هنالك عدة تعديلات تمت على AuthController وذلك لأننا أضفنا دالة خاصة بتحديث التوكن فأصبح لدينا كود مشترك بين دالة التحديث ودالة الإنشاء مما توجب علينا إستخلاصها في دوال مشتركة:
 
 ```csharp
 using System;
@@ -745,12 +745,10 @@ namespace aspnetcorewebapiproject.Controllers.v1
                     (jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase)))
                     return principal;
 
-                // return null;
                 throw new SecurityTokenException("Invalid token");
             }
             catch
             {
-                // return null;
                 throw new SecurityTokenException("Invalid token");
             }
         }
