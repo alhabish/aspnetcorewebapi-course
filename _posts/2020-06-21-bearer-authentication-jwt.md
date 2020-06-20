@@ -766,7 +766,7 @@ namespace aspnetcorewebapiproject.Controllers.v1
 
 * **GenerateRefreshToken_**: وهي المسؤولة فعلاً عن إنشاء الـ refresh token ويتم إستخدامها في كلاً من GenerateToken و RefreshToken.
 
-* **GetPrincipalFromToken_**: دورها إستخلاص معلومات المستخدم الحامل للـ jwt token. من المهم جعل `ValidateLifetime = false` وإلا لن يستطيع المستخدم تحديث الـ jwt token الذي لديه بسبب إنتهاء صلاحيته.
+* **GetPrincipalFromToken_**: دورها إستخلاص معلومات المستخدم المستفيد من الـ jwt token. من المهم جعل `ValidateLifetime = false` وإلا لن يستطيع المستخدم تحديث الـ jwt token الذي لديه بسبب إنتهاء صلاحيته.
 
 ### التجربة في Postman
 
@@ -778,7 +778,7 @@ namespace aspnetcorewebapiproject.Controllers.v1
 
 {% include image.html url="assets/files/article_12/postman-employees-getemployee.png" border="1" %}
 
-3) نفذ الإستدعاء السابق بعد مرور دقيقة واحدة:
+3) نفذ الإستدعاء السابق بعد مرور أكثر من 5 دقائق:
 
 {% include image.html url="assets/files/article_12/postman-employees-getemployee-unauthorized.png" border="1" %}
 	
