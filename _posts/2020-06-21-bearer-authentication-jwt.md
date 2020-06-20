@@ -758,38 +758,17 @@ namespace aspnetcorewebapiproject.Controllers.v1
 
 فيما يلي شرح لأهم النقاط المذكورة في الكود:
 
-* GenerateToken: هذه العملية مسؤولة عن إنشاء الـ jwt token والخاصية الجديدة refresh token وإعادتها للمستخدم. يجب التنويه أنه كلما أنشأنا jwt token ننشئ في مقابله refresh token ونحفظها في قاعدة البيانات. ولكن لا نحفظ الـ jwt token ذاته وإنما معرفه ID
+* **GenerateToken**: هذه العملية مسؤولة عن إنشاء الـ jwt token والخاصية الجديدة refresh token وإعادتها للمستخدم. يجب التنويه أنه كلما أنشأنا jwt token ننشئ في مقابله refresh token ونحفظها في قاعدة البيانات. ولكن لا نحفظ الـ jwt token ذاته وإنما معرفه ID
 
-* RefreshToken: وهي مسؤولة عن إنشاء الـ refresh token ولكنها تقوم بعدة عمليات مهمة للتأكد من صحة الـ jwt token والـ refresh token الممر اليها. 
+* **RefreshToken**: وهي مسؤولة عن إنشاء الـ refresh token ولكنها تقوم بعدة عمليات مهمة للتأكد من صحة الـ jwt token والـ refresh token الممر اليها. 
 
-* GenerateJwtToken_: وهي المسؤولة فعلاً عن إنشاء الـ jwt token ويتم إستخدامها في كلاً من GenerateToken و RefreshToken.
+* **GenerateJwtToken_**: وهي المسؤولة فعلاً عن إنشاء الـ jwt token ويتم إستخدامها في كلاً من GenerateToken و RefreshToken.
 
-* GenerateRefreshToken_: وهي المسؤولة فعلاً عن إنشاء الـ refresh token ويتم إستخدامها في كلاً من GenerateToken و RefreshToken.
+* **GenerateRefreshToken_**: وهي المسؤولة فعلاً عن إنشاء الـ refresh token ويتم إستخدامها في كلاً من GenerateToken و RefreshToken.
 
-* GetPrincipalFromToken_: دورها إستخلاص معلومات المستخدم الحامل للـ jwt token. من المهم جعل `ValidateLifetime = false` وإلا لن يستطيع المستخدم تحديث الـ jwt token الذي لديه بسبب إنتهاء صلاحيته.
+* **GetPrincipalFromToken_**: دورها إستخلاص معلومات المستخدم الحامل للـ jwt token. من المهم جعل `ValidateLifetime = false` وإلا لن يستطيع المستخدم تحديث الـ jwt token الذي لديه بسبب إنتهاء صلاحيته.
 
 ### التجربة في Postman
-
-صلاحية الـ jwt token هي 15 دقيقة كما حددناها في appsettings.json ولكنها مده طويلة لإختبار ما قمنا به ولذلك سنحولها الى دقيقة واحدة:
-
-```json
-	"TokenLifeTime": "00:01:00",
-```
-
-هنالك تعديل آخر يجب علينا القيام به. في إعدادات الـ JWT في Startup.cs هنالك قيمة بإسم ClockSkew قيمتها الإفتراضية 5 دقائق ولم نقم بالتعديل عليها. والقصد فيها هو أنه حتى لو تجاوز وقت صلاحية الـ jwt token بالمدة المحددة في ClockSkew فإنا لا تزال صالحة للإستعمال. ولذلك سنطلب أن يكون التحقق من تاريخ صلاحية التوكن دقيق تماماً بدون أي مجال زمني إضافيوذلك بالقيام بالتالي:
-
-```csharp
-services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(options => 
-{
-	options.SaveToken = true;
-	options.TokenValidationParameters = new TokenValidationParameters()
-	{
-		...
-		ClockSkew = TimeSpan.Zero
-	};
-}
-```
 
 1) إطلب auth / login :
 
