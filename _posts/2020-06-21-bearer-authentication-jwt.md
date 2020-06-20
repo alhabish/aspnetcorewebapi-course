@@ -7,13 +7,15 @@ index: 12
 comments: true
 ---
 
-في النوع السابق من المصادقة basic authentication كان يتوجب علينا إرسال إسم المستخدم وكلمة المرور عند تنفيذ أي عملية. وفي هذا الدرس سنتعلم نوع آخر من المصادقة مبني على إستخدام التوكن. وهو عبارة عن نص يحتوي على معلومات خاصة بالمستخدم الذي يحاول تنفيذ العملية من دون إحتواءه على كلمة المرور الخاصة بالمستخدم. هذا التوكن يتم إنشاؤه بواسطة private key موجود على الـ server ولذلك وطالما أخذ بالإعتبار الإحتياطات الأمنية اللازمة فإنه يصعب تزوير هذا التوكن.
+في النوع السابق من المصادقة basic authentication كان يتوجب علينا إرسال إسم المستخدم وكلمة المرور عند تنفيذ أي عملية. وفي هذا الدرس سنتعلم نوع آخر من المصادقة مبني على إستخدام التوكن. وهو عبارة عن نص يحتوي على معلومات خاصة بالمستخدم الذي يحاول تنفيذ العملية من دون إحتواءه على كلمة المرور الخاصة بالمستخدم. هذا التوكن يتم إنشاؤه بواسطة private key موجود على الـ server ولذلك وطالما أخذنا بالإعتبار الإحتياطات الأمنية اللازمة فإنه يصعب تزوير هذا التوكن.
 
 آلية إنشاء التوكن تكون بالشكل التالي: 
 
-1) يستدعي المستخدم العملية auth / login ممرراً إسم المستخدم وكلة المرور الخاصة به
-2) يتم التحقق من صحة معلومات المستخدم وبعد ذلك سنعيد اليه توكن يمكن إستخدامه في تنفيذ باقي العمليات
-3) في نفس الوقت سيعطى المستخدم توكن للتحديث refresh token بحيث يمرره الى العملية auth / refresh لتحديث الـ jwt token من دون الحاجة الى إرسال إسم المستخدم وكلمة المرور مرة أخرى
+1)  يستدعي المستخدم العملية auth / login ممرراً إسم المستخدم وكلمة المرور الخاصة به
+
+2)  يتم التحقق من صحة معلومات المستخدم وبعد ذلك سنعيد اليه توكن يمكن إستخدامه في تنفيذ باقي العمليات
+
+3)  في نفس الوقت سيعطى المستخدم توكن للتحديث refresh token بحيث يمرره الى العملية auth / refresh لتحديث الـ jwt token من دون الحاجة الى إرسال إسم المستخدم وكلمة المرور مرة أخرى
 
 سيتم تمرير التوكن في الـ Authorization header بالشكل التالي:
 
@@ -25,7 +27,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1la
 
 {% include image.html url="assets/files/article_12/jwt.jpeg" border="1" %}
 
-## العمل في branch مستقل
+### العمل في branch مستقل
 
 ننشئ branch جديد ونتحول اليه:
 
@@ -41,9 +43,9 @@ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
 dotnet add package System.IdentityModel.Tokens.Jwt
 ```
 
-## إدارة المستفيدين من الخدمة
+## إنشاء الـ JWT Token
 
-### إنشاء الـ class
+### إدارة المستفيدين من الخدمة
 
 ننشئ ملف جديد بإسم User.cs يمثل المستفيد من الخدمة التي نقدمها داخل المجلد Entities:
 
@@ -118,7 +120,7 @@ dotnet ef database update
 
 {% include image.html url="assets/files/article_12/ads-users.png" border="1" %}
 
-## إضاقة إعدادات في appsettings.json
+### إضاقة إعدادات في appsettings.json
 
 نقوم بإضافة الـ key المستخدم للتشفير ومدة صلاحية الـ jwt token وهي 5 دقائق:
 
@@ -131,7 +133,7 @@ dotnet ef database update
 }
 ```
 
-## إضافة DTO
+### إضافة DTO
 
 في المجلد Models / v1 / Auth  نضيف الملف LoginDto.cs والذي يحتوي على معلومات المستخدم المطلوبة عند تسجيل الدخول:
 
@@ -146,7 +148,7 @@ namespace aspnetcorewebapiproject.Models.Auth.v1
 }
 ```
 
-## إضافة AuthController
+### إضافة AuthController
 
 نقوم الآن بإضافة الـ controller المسؤول عن إنشاء التوكن token وذلك في المجلد Controllers / v1 كما يلي:
 
@@ -240,11 +242,11 @@ namespace aspnetcorewebapiproject.Controllers.v1
 }
 ```
 
-## التعديل على Startup.cs
+### التعديل على Startup.cs
 
 لتفعيل ما قمنا به نقوم بالتالي:
 
-### التعديل على الدالة ()Configure
+#### التعديل على الدالة ()Configure
 
 علينا إضافة ()app.UseAuthentication  قبل ()app.UseAuthorization:
 
@@ -261,7 +263,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<
 }
 ```
 
-### التعديل على ()ConfigureServices
+#### التعديل على ()ConfigureServices
 
 نقوم بإضافة عملية التحقق ونعتمد التطبيق الموجود في BasicAuthenticationHandler:
 
@@ -270,12 +272,7 @@ public void ConfigureServices(IServiceCollection services)
 {
 	...
 	
-	services.AddAuthentication( options =>
-	{
-		options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-		options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-		options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-	})
+	services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options => 
 	{
 		options.TokenValidationParameters = new TokenValidationParameters()
@@ -348,7 +345,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## التعديل على EmployeesController
+### التعديل على EmployeesController
 
 لجعل EmployeesController تتطلب التحقق من المستخدم قبل إمكانية الإستفادة منها فإنه يتوجب علينا إضافة الـ [Authorize] attribute:
 
@@ -360,7 +357,7 @@ public class EmployeesController : ControllerBase
 	...
 ```
 
-## التجربة في Postman
+### التجربة في Postman
 
 سنقوم بطلب الخدمة هذه المرة بدون تمرير الـ Authorization header:
 
@@ -391,7 +388,7 @@ JSON.stringify(JSON.parse(atob("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQ
 
 {% include image.html url="assets/files/article_12/postman-hidden-headers.png" border="1" %}
 
-## لمعرفة المستخدم الذي قام بالإستدعاء
+### لمعرفة المستخدم الذي قام بالإستدعاء
 
 بإمكانك الآن إستخدام User.Identity للحصول على معلومات المستخدم الذي قام بالإستدعاء. وعلى سبيل المثال:
 
@@ -404,7 +401,7 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 
 {% include image.html url="assets/files/article_12/vscode-terminal.png" border="1" %}
 
-## لعدم إشتراط التحقق
+### لعدم إشتراط التحقق
 
 هناك حالات لا تريد فيها المستخدم أن يرسل إسم مستخدم وكلمة المرور، كأن يسجل في الخدمة لأول مرة، ففي هذه الحالة يمكنك إضافة الـ attribute التالي: [AllowAnonymous] على العملية التي لا تتطلب التحقق من المستخدم.
 
@@ -495,7 +492,7 @@ dotnet ef migrations add "Adds_UserRefreshTokens"
 dotnet ef database update
 ```
 
-## إضافة DTO
+### إضافة DTO
 
 في المجلد Models / v1 / Auth  نضيف الملف RefreshTokenDto.cs والذي يحتوي على معلومات المستخدم المطلوبة عند تسجيل الدخول:
 
