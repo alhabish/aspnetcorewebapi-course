@@ -265,7 +265,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<
 
 #### التعديل على ()ConfigureServices
 
-نقوم بإضافة عملية التحقق ونعتمد التطبيق الموجود في BasicAuthenticationHandler:
+نقوم بإضافة ما يلي في آخر الدالة:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -286,6 +286,8 @@ public void ConfigureServices(IServiceCollection services)
 	});
 }
 ```
+
+ثم نضيف الدالة الجديدة التالية:
 
 ```csharp
 private bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken token, TokenValidationParameters @params)
@@ -365,7 +367,7 @@ public class EmployeesController : ControllerBase
 
 نلاحظ أن الخدمة رفضت هذه العملية وأعادت الـ HTTP Status Code التالي: Unauthorized 401.
 
-نطلب الآن العنوان التالي ونقوم بتمرير إسم المستخدم وكلمة المرور لأحد المستخدمين المسجلين في AuthenticationService في الـ request body:
+نطلب الآن العنوان التالي ونقوم بتمرير إسم المستخدم وكلمة المرور لأحد المستخدمين المسجلين في قاعدة البيانات في الـ request body:
 
 ```html
 https://localhost:5001/api/v1.0/auth/login
@@ -411,7 +413,7 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 
 مشكلة التوكن أن صلاحيته تنتهي expires بعد مرور فترة من الزمن تقوم أنت بتحديدها. وما يمكننا فعله في هذه الحالية هو توفير خاصية لتحديث التوكن بدلاً من تسجيل الدخول بإستخدام الإسم وكلمة المرور من جديد.
 
-الفرق بين توكن jwt وتوكن التحديث هو أن الأول فترة صلاحية أقل بكثير من الثاني حيث من الممكن أن تستمر صلاحية الثاني الى عدة أشهر. بالإضافة الى أن توكن التحديث لا يحتوي على معلومات المستخدم وإنما يعتبر كمعرف للأول لا أكثر.
+الفرق بين توكن jwt وتوكن التحديث هو أن الأول فترة صلاحيته أقل بكثير من الثاني حيث من الممكن أن تستمر صلاحية الثاني الى عدة أشهر. بالإضافة الى أن توكن التحديث لا يحتوي على معلومات المستخدم وإنما يعتبر كمعرف للأول لا أكثر.
 
 سوف نستخدم توكن jwt المنتهي صلاحيته وتوكن التحديث refresh token لتوليد توكن jwt جديد.
 
@@ -422,7 +424,7 @@ public async Task<ActionResult<EmployeesResponse<EmployeeDetailsDto>>> GetEmploy
 ```csharp
   "JwtSettings": {
     "SecretKey": "SecretSecurityKey",
-    "TokenLifeTime": "00:15:00",
+    "TokenLifeTime": "00:05:00",
     "RefreshTokenLifeTimeInMonths": 6
   }
 ```
