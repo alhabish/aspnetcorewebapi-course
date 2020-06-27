@@ -7,15 +7,15 @@ index: 13
 comments: true
 --- 
 
-في هذا الدرس سوف نتعلم كيف نرفع مشروعنا لأحد الخدمات السحابية، Azure بالتحديد، 
+في هذا الدرس سوف نتعلم كيف نرفع deploy مشروعنا لأحد الخدمات السحابية، Azure بالتحديد، وذلك بإتباع الخطوات التالية: 
 
-## إنشاء حساب لدى Azure
+## إنشاء حساب في Azure
 
 إتجه الى الرابط التالي:
 
 [Azure](https://azure.microsoft.com/en-us/free/)
 
-إضغط على Start free:
+ثم أختر Start free:
 
 {% include image.html url="assets/files/article_13/azure-start-free.png" border="1" %}
 
@@ -64,7 +64,7 @@ comments: true
 
 ## رفع قاعدة البيانات MainDb الى Azure
 
-إتصل بقاعدة البيانات عن طريق MS SQL Server Management Studio:
+إتصل بقاعدة البيانات على جهازك عن طريق MS SQL Server Management Studio:
 
 {% include image.html url="assets/files/article_13/ssms-connect-to-db.png" border="1" %}
 
